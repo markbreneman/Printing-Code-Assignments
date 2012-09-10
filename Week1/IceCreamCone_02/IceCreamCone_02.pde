@@ -19,3 +19,8 @@ rectMode(CENTER);
 rect(width/2,height/2,radius+15,22);
 
 }
+
+void keyPressed() {
+    save(millis()+".png");
+}
+
