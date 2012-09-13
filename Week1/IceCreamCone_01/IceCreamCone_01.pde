@@ -1,5 +1,5 @@
 PGraphics canvas;
-int radius;
+
 //Dimensions of A4 Paper in Inches
 float paper_width = 8.3;
 float paper_height = 11.7;
@@ -13,57 +13,77 @@ float ratioWidth = 1;
 float ratioHeight = 1;
 float ratio = 1;
 
-void setup()
-{  
-int width = 600;
-int height = int(width*paper_ratio);
+void setup() {
+  
+  int width = 600;//Change this number to get a display window with papers aspect ratio
+  int height = int(width*paper_ratio);
 
-size(width,height,P2D);
-background(0);  
-smooth(8);
+  size(width, height);
+  background(0); 
 
-canvas = createGraphics(canvas_width, canvas_height, P2D);
-calculateResizeRatio();
+  canvas = createGraphics(canvas_width, canvas_height);
+  calculateResizeRatio();
 
-radius=250;
-strokeWeight(radius/35);
+  canvas.beginDraw();
+    canvas.background(0); 
+    
+    //Ice Cream Driving parameters
+    int iceCreamDia=1000;
+    int iceCreamRad=iceCreamDia/2;
+    int centerX=canvas_width/2;
+    int centerY=canvas_height/2-iceCreamRad; 
+    canvas.strokeWeight(iceCreamDia/35);
+    canvas.stroke(255);
+    canvas.fill(0);
+  
+    //Ice Cream
+//    canvas.fill(255);
+//    canvas.stroke(0);
+    canvas.ellipseMode(CENTER);
+    canvas.ellipse(centerX, centerY, iceCreamDia, iceCreamDia);
+  
+    //Cone
+//    canvas.fill(0);
+//    canvas.stroke(255);
+    canvas.triangle(
+    centerX-iceCreamDia*.525, centerY+iceCreamRad*.25, 
+    centerX+iceCreamDia*.525, centerY+iceCreamRad*.25, 
+    centerX, centerY+1.55*iceCreamDia);
+  
+    //Cookie
+//    canvas.fill(0);
+//    canvas.stroke(255);
+    canvas.pushMatrix();
+    canvas.translate(centerX, centerY);
+    canvas.rotate(-PI/4);
+    canvas.rectMode(CENTER);
+    canvas.rect(iceCreamDia/2, 0, iceCreamDia*.5, iceCreamDia*.15);
+    canvas.popMatrix();  
 
-//Ice Cream
-ellipseMode(CENTER);
-int centerX = width/2;
-int centerY = height/2-radius/2;
-ellipse(centerX, centerY, radius, radius);
- 
-//Cone
-triangle(centerX-radius*.525, centerY*1.05, 
-         centerX+radius*.525, centerY*1.05,
-         width/2, height/2+radius);
-//Cookie        
-translate(centerX, centerY);
-rotate(PI/4);
-rectMode(CENTER);
-rect(radius/8, -radius/2, radius*.15, radius*.4);
+  canvas.endDraw();
 
+  //Adding Image to Display
+  float resizedWidth = (float) canvas.width * ratio;
+  float resizedHeight = (float) canvas.height * ratio;
+  //Show the canvas on the screen
+  image(canvas, 
+  (width / 2) - (resizedWidth / 2), 
+  (height / 2) - (resizedHeight / 2), 
+  resizedWidth, 
+  resizedHeight);
+  
+  //Saving Canvas
+  canvas.save("IceCreamCone01_"+year()+day()+hour()+minute()+".png");
 }
 
-/*  Calculate resizing*/
 
+/*  Calculate resizing*/
 void calculateResizeRatio()
 {
   ratioWidth = (float) width / (float) canvas.width;
   ratioHeight = (float) height / (float) canvas.height;
-  
-  if(ratioWidth < ratioHeight)  ratio = ratioWidth;
+
+  if (ratioWidth < ratioHeight)  ratio = ratioWidth;
   else                          ratio = ratioHeight;
 }
 
-/*Saving out a png*/
-void keyPressed()
-{
-  if(key == 's')
-  {  
-    println("Saving Image");
-    canvas.save("image_" + year() + "_" + month()+ "_" + day() + "_" + hour() + "_" + minute() + "_" + second() + ".png");
-    println("Saved Image"); 
-  }
-}
