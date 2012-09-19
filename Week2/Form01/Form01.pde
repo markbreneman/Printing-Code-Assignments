@@ -101,10 +101,10 @@ void drawWave(float waveWidth, float waveHeight) {
   //Tip of the IceBerg
   
   for (int i =forLoop1Wave; i < forLoop1Wave+forLoop2Wave; i+=300) {
-    canvas.vertex(i, random(-1200,0));  
-//    canvas.vertex(forLoop1Wave+700, -2000);
-//    canvas.vertex(forLoop1Wave+1000, -1500);  
-//    canvas.vertex(forLoop1Wave+1200, -2300);  
+//    canvas.vertex(i, random(-1200,0));  
+    canvas.vertex(forLoop1Wave+700, -2000);
+    canvas.vertex(forLoop1Wave+1000, -1500);  
+    canvas.vertex(forLoop1Wave+1200, -2300);  
   
   }
 
