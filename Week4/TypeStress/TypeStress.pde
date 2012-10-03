@@ -22,7 +22,7 @@ void setup(){
   RG.init(this);
   
   //  Load the font file we want to use (the file must be in the data folder in the sketch floder), with the size 60 and the alignment CENTER
-  grp = RG.getText("order", "Garamond.ttf", 200, CENTER); //Last Parameter is the "origin" of the text
+  grp = RG.getText("o", "Garamond.ttf", 200, CENTER); //Last Parameter is the "origin" of the text
 
 
 }
@@ -40,7 +40,7 @@ void draw(){
   // Draw the Texts group of shapes: The outlines
   noFill();
   stroke(0,0,200,150);
-  grp.draw();
+//  grp.draw();
   
   // Get the points on the curve's shape
   //  RG.setPolygonizer(RG.ADAPTATIVE);
@@ -54,17 +54,17 @@ void draw(){
   // If there are any points
   if(txtPoints != null){
     noFill();
-    stroke(0,200,0);
-//    beginShape();
-//    for(int i=0; i<points.length; i++){
-//      vertex(points[i].x, points[i].y);
-//    }
-//    endShape();
-  
-    fill(0);
-    stroke(0);
+//    stroke(0,,0);
+    beginShape();
     for(int i=0; i<txtPoints.length; i++){
-      ellipse(txtPoints[i].x, txtPoints[i].y,5,5);  
+      vertex(txtPoints[i].x, txtPoints[i].y);
     }
+    endShape();
+  
+//    fill(0);
+//    stroke(0);
+//    for(int i=0; i<txtPoints.length; i++){
+//      ellipse(txtPoints[i].x, txtPoints[i].y,5,5);  
+//    }
   }
 }
