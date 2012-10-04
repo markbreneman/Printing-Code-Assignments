@@ -57,7 +57,7 @@ void setup() {
 void draw() {
   canvas.beginDraw();
   canvas.colorMode(HSB, 360, 100, 100,1);
-  canvas.background(0,0,100,.9);
+  canvas.background(0,0,100,.5);
   canvas.smooth();
   RG.setPolygonizer(RG.UNIFORMLENGTH);
 //  RG.setPolygonizerLength(map(mouseY, 0, height, 3, 200));
@@ -94,7 +94,7 @@ void draw() {
   RShape cuttingLine0 = RG.getLine(-4, -500, 100, 100);
    canvas.stroke(0,0,0,1);
   canvas.strokeWeight(5);
-  canvas.line(-4, -500, 100, 100);
+  //canvas.line(-4, -500, 100, 100);
 //  canvas.ellipse(0,0,50,50);
   
 //  RG.shape(cuttingLine0);//create a shape of the cutting line
@@ -136,7 +136,7 @@ void draw() {
   RShape cuttingLine1 = RG.getLine(75, -500, 75, 100);
 //  canvas.stroke(0,0,0,1);
 //  canvas.strokeWeight(5);
-  canvas.line(75, -500, 75, 100);
+  //canvas.line(75, -500, 75, 100);
   canvas.ellipse(0,0,19,19);
   
 //  stroke(360,0,0,.2);
@@ -159,8 +159,8 @@ void draw() {
   for (int j=0; j<tIntPoints.length; j++) { 
           
           if (int(tPoints[i].x) <= int(tIntPoints[j].x+50) && int(tPoints[i].x) >= int(tIntPoints[j].x-50) && int(tPoints[i].y) <= int(tIntPoints[j].y+50) && int(tPoints[i].y) >= int(tIntPoints[j].y-50)) {
-         tPoints[i].x=tPoints[i].x+noise(tPoints[i].x)*noiseScale*random(-1,1); 
-         tPoints[i].y=tPoints[i].y+noise(tPoints[i].y)*noiseScale*random(-1,1);
+         tPoints[i].x=tPoints[i].x+noise(tPoints[i].x)*noiseScale*.5*random(-1,1); 
+         tPoints[i].y=tPoints[i].y+noise(tPoints[i].y)*noiseScale*.5*random(-1,1);
          }
          canvas.vertex(tPoints[i].x,tPoints[i].y);
   }   
@@ -180,7 +180,7 @@ void draw() {
   RShape cuttingLine2 = RG.getLine(5, -500, 3, 100);
   canvas.stroke(0,0,0,1);
   canvas.strokeWeight(5);
-  canvas.line(5, -500, 3, 100);
+  //canvas.line(5, -500, 3, 100);
 //  canvas.ellipse(0,0,19,19);
   
   
@@ -204,8 +204,8 @@ void draw() {
   for (int j=0; j<rIntPoints.length; j++) { 
           
           if (int(rPoints[i].x) <= int(rIntPoints[j].x+50) && int(rPoints[i].x) >= int(rIntPoints[j].x-50) && int(rPoints[i].y) <= int(rIntPoints[j].y+50) && int(rPoints[i].y) >= int(rIntPoints[j].y-50)) {
-         rPoints[i].x=rPoints[i].x+noise(rPoints[i].x)*noiseScale*random(-1,1); 
-         rPoints[i].y=rPoints[i].y+noise(rPoints[i].y)*noiseScale*random(-1,1);
+         rPoints[i].x=rPoints[i].x+noise(rPoints[i].x)*noiseScale*.25*random(-1,1); 
+         rPoints[i].y=rPoints[i].y+noise(rPoints[i].y)*noiseScale*.25*random(-1,1);
          }
          canvas.vertex(rPoints[i].x,rPoints[i].y);
   }   
@@ -225,7 +225,7 @@ void draw() {
   RShape cuttingLine3 = RG.getLine(-4, -500, 100, 100);
    canvas.stroke(0,0,0,1);
   canvas.strokeWeight(5);
-  canvas.line(-3, -500, 100, 100);
+  //canvas.line(-3, -500, 100, 100);
 //  ellipse(0,0,19,19);
   
 //  stroke(360,0,0,.2);
@@ -269,7 +269,7 @@ void draw() {
 //  ellipse(0,0,19,19);
  canvas.stroke(0,0,0,1);
   canvas.strokeWeight(5);
-  canvas.line(-4, -500, 100, 100);
+  //canvas.line(-4, -500, 100, 100);
   
 //  stroke(360,0,0,.2);
 canvas.strokeWeight(2);
@@ -311,7 +311,7 @@ canvas.strokeWeight(2);
   RShape cuttingLine5 = RG.getLine(-4, -500, 100, 100);
    canvas.stroke(0,0,0,1);
   canvas.strokeWeight(5);
-  canvas.line(-4, -500, 100, 100);
+  //canvas.line(-4, -500, 100, 100);
 //  ellipse(0,0,19,19);
   
 //  stroke(360,0,0,.2);

@@ -120,8 +120,8 @@ void draw() {
   for (int j=0; j<tIntPoints.length; j++) { 
           
           if (int(tPoints[i].x) <= int(tIntPoints[j].x+3) && int(tPoints[i].x) >= int(tIntPoints[j].x-3) && int(tPoints[i].y) <= int(tIntPoints[j].y+3) && int(tPoints[i].y) >= int(tIntPoints[j].y-3)) {
-         tPoints[i].x=tPoints[i].x+noise(tPoints[i].x)*noiseScale*random(-1,1); 
-         tPoints[i].y=tPoints[i].y+noise(tPoints[i].y)*noiseScale*random(-1,1);
+         tPoints[i].x=tPoints[i].x+noise(tPoints[i].x)*noiseScale*.5*random(-1,1); 
+         tPoints[i].y=tPoints[i].y+noise(tPoints[i].y)*noiseScale*.5*random(-1,1);
          }
          vertex(tPoints[i].x,tPoints[i].y);
   }   
@@ -161,8 +161,8 @@ void draw() {
   for (int j=0; j<rIntPoints.length; j++) { 
           
           if (int(rPoints[i].x) <= int(rIntPoints[j].x+3) && int(rPoints[i].x) >= int(rIntPoints[j].x-3) && int(rPoints[i].y) <= int(rIntPoints[j].y+3) && int(rPoints[i].y) >= int(rIntPoints[j].y-3)) {
-         rPoints[i].x=rPoints[i].x+noise(rPoints[i].x)*noiseScale*random(-1,1); 
-         rPoints[i].y=rPoints[i].y+noise(rPoints[i].y)*noiseScale*random(-1,1);
+         rPoints[i].x=rPoints[i].x+noise(rPoints[i].x)*noiseScale*.25*random(-1,1); 
+         rPoints[i].y=rPoints[i].y+noise(rPoints[i].y)*noiseScale*.25*random(-1,1);
          }
          vertex(rPoints[i].x,rPoints[i].y);
   }   
