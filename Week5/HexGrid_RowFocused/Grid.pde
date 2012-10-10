@@ -65,9 +65,7 @@ class ModularGrid
   void display()
   {
     canvas.noFill();
-//    canvas.fill(0,0,100,1);
     canvas.strokeWeight(10);
-    canvas.stroke(0, 100, 100, 20);
     
     // draw the big bounding box
     canvas.rect(pageMargin, pageMargin, canvas.width - (2*pageMargin), canvas.height - (2*pageMargin));

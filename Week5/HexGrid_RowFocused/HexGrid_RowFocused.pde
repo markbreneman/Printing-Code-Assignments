@@ -38,21 +38,72 @@ void draw() {
   canvas.colorMode(HSB, 360, 100, 100, 1);
   canvas.background(0,0,100, .5);
   canvas.smooth();
-
-  // create a grid object as a container for our grid variables
-  ModularGrid grid = new ModularGrid(10,10, 30, 100); // COLUMNS,ROWS GUTTTERSIZE, PAGEMARGIN  
-  ModularGrid grid2 = new ModularGrid(4,4, 10, 100);
-
   
-  Module module1 = grid.modules[3][0];
-  canvas.fill(274/360,0.89,0.43,1);
+  
+  //Grid 1
+  // create a grid object as a container for our grid variables
+  int grid1Cols=7;
+  int grid1Rows=7;
+  ModularGrid grid1 = new ModularGrid(grid1Cols, grid1Rows, 200, 100); // COLUMNS,ROWS GUTTTERSIZE, PAGEMARGIN
+  
+  for(int i=0; i<grid1Rows; i++){
+    for(int j=0; j<grid1Cols; j++){
+    Module module1 = grid1.modules[i][j];
+//  canvas.fill(0,0,random(40,100),1);
+  canvas.noFill();
   new Hexagon(module1.cX,module1.cY,module1.w);
+   }}
+  
+  
+  //Grid 2  
+  int grid2Cols=7;
+  int grid2Rows=7;
+  ModularGrid grid2 = new ModularGrid(grid2Cols, grid2Rows,200, 100);
+  
+  canvas.pushMatrix();
+  canvas.translate(-100,-150);
+
+  for(int k=0; k<grid2Rows; k++){
+    for(int l=0; l<grid2Cols; l++){
+    Module module2 = grid2.modules[k][l];
+//  canvas.fill(0,0,random(60,100),1);
+    canvas.noFill();
+  new Hexagon(module2.cX,module2.cY,module2.w);
+   }}
+   canvas.popMatrix();
+  
+
+  //Grid 3  
+  int grid3Cols=7;
+  int grid3Rows=7;
+  ModularGrid grid3 = new ModularGrid(grid3Cols, grid3Rows,200, 100);
+  
+  canvas.pushMatrix();
+  canvas.translate(-200,-300);
+
+  for(int m=0; m<grid3Rows; m++){
+    for(int n=0; n<grid3Cols; n++){
+    Module module3 = grid3.modules[m][n];
+//  canvas.fill(0,0,random(80,100),1);
+    canvas.noFill();
+  new Hexagon(module3.cX,module3.cY,module3.w);
+   }}
+   canvas.popMatrix();  
+  
+  
   
   
   if (gridShow==true)
   {
-    grid.display();
-//    grid2.display(); 
+    canvas.stroke(0, 100, 100, 20);
+    grid1.display();
+    grid2.display(); 
+    grid3.display(); 
+  }
+
+  if (gridShow==false && showing.equals("Not Showing"))
+  {
+  canvas.stroke(0,0,0,.3);
   }
 
   canvas.endDraw();
