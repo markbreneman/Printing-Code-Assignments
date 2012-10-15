@@ -67,8 +67,8 @@ class ModularGrid
     canvas.noFill();
     canvas.strokeWeight(10);
     
-    // draw the big bounding box
     canvas.rect(pageMargin, pageMargin, canvas.width - (2*pageMargin), canvas.height - (2*pageMargin));
+    
     
     // draw all modules
     for(int i = 0; i < cols; i++)
@@ -76,7 +76,7 @@ class ModularGrid
       for(int j = 0; j < rows; j++)
       {
         new Hexagon(modules[i][j].cX, modules[i][j].cY, modules[i][j].w);
-//        canvas.rect(modules[i][j].x, modules[i][j].y, modules[i][j].w, modules[i][j].h);
+        canvas.rect(modules[i][j].x, modules[i][j].y, modules[i][j].w, modules[i][j].h);
       } 
     }
     
