@@ -39,22 +39,28 @@ void draw() {
   canvas.smooth();
   
   
-  //Grid 1
-  // create a grid object as a container for our grid variables
+  //Grid 1 - Divide up the Print into 3's
+  // create a grid object as a container for Logos
   int gridCols=3;
   int gridRows=1;
   ModularGrid grid = new ModularGrid(gridCols, gridRows, 100, 200, 600); // COLUMNS,ROWS GUTTTERSIZE, PAGEMARGIN WIDTH, PAGEMARGIN HEIGHT
   
-  //Nested
+  //Nested Grids
+  ModularGrid gridN1 = new ModularGrid(5, 5, 10, 0, 0, grid.modules[0][0]); // COLUMNS,ROWS GUTTTERSIZE, PAGEMARGIN WIDTH, PAGEMARGIN HEIGHT, CONTAINER MODULE
   
-  ModularGrid gridN = new ModularGrid(5, 5, 10, 0, 0, grid.modules[0][0].x, grid.modules[0][0].y,grid.modules[0][0].w, grid.modules[0][0].h); // COLUMNS,ROWS GUTTTERSIZE, PAGEMARGIN WIDTH, PAGEMARGIN HEIGHT, STARTX, STARTY,STARTX, CONTAINING MODULEY,  
   
-//  ModularGrid gridN = new ModularGrid(5, 5, 10, 0, 0, grid.modules[0][0]); // COLUMNS,ROWS GUTTTERSIZE, PAGEMARGIN WIDTH, PAGEMARGIN HEIGHT, CONTAINER
+//  rect(a, b, c, d, r)
+  canvas.fill(0,0,0,.5);
+//  new SpeechBubble(gridN1.modules[0][0].x, gridN1.modules[0][0].y,gridN1.modules[3][0].x, gridN1.modules[4][0].y,80.0, grid.modules[0][0]);
+  
+  new SpeechBubble(gridN1.modules[0][0].x, gridN1.modules[0][0].y,gridN1.modules[int(random(0,4))][0].x, gridN1.modules[int(random(0,4))][0].y,80.0, grid.modules[0][0]);
+  
+//  new SpeechBubble(gridN1.modules[0][0].x, gridN1.modules[0][0].y,gridN1.modules[3][0].x, gridN1.modules[4][0].y,80.0);
    
   if (gridShow==true)
   {
     grid.display();
-    gridN.display();
+    gridN1.display();
   }
 
   if (gridShow==false && showing.equals("Not Showing"))

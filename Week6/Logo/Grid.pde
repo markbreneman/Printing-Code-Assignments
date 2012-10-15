@@ -49,17 +49,17 @@ class ModularGrid
     }
   }
   
-    ModularGrid(int _cols, int _rows, float _gutterSize, float _pageMarginW, float _pageMarginH, float _startX, float _startY, float _modW, float _modH)
+    ModularGrid(int _cols, int _rows, float _gutterSize, float _pageMarginW, float _pageMarginH, Module _module )
   {
     cols = _cols;
     rows = _rows;
     gutterSize = _gutterSize;
     pageMarginW = _pageMarginW;
     pageMarginH = _pageMarginH;
-    startX = _startX;
-    startY = _startY;
-    modW = _modW;
-    modH = _modH;
+    startX = _module.x;
+    startY = _module.y;
+    modW = _module.w;
+    modH = _module.h;
     
     modules = new Module[cols][rows];
     
