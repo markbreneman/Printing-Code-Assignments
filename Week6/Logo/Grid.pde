@@ -120,7 +120,7 @@ class ModularGrid
     canvas.stroke(255, 0, 0, 100);
     
     // draw the big bounding box
-    canvas.rect(pageMarginW, pageMarginH, canvas.width - (2*pageMarginW), canvas.height - (2*pageMarginH));
+//    canvas.rect(pageMarginW, pageMarginH, canvas.width - (2*pageMarginW), canvas.height - (2*pageMarginH));
     
     // draw all modules
     for(int i = 0; i < cols; i++)
