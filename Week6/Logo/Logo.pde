@@ -15,6 +15,14 @@ float ratioWidth = 1;
 float ratioHeight = 1;
 float ratio = 1;
 
+int gridCols;
+int gridRows;
+int gridGutter;
+int gridPMWidth;
+int gridPMHeight;
+
+
+
 Boolean gridShow=false;
 String showing="Not Showing";
 
@@ -68,7 +76,7 @@ void setup() {
 }
 
 void draw() {
-  println(speechHeight);
+  
   canvas.beginDraw();
   canvas.colorMode(HSB, 360, 100, 100, 1);
   canvas.background(0,0,100, .5);
@@ -77,9 +85,14 @@ void draw() {
   
    //Grid 1 - Divide up the Print into 3's
   // create a grid object as a container for Logos
-  int gridCols=3;
-  int gridRows=1;
-  ModularGrid grid = new ModularGrid(gridCols, gridRows, 100, 200, 600); // COLUMNS,ROWS GUTTTERSIZE, PAGEMARGIN WIDTH, PAGEMARGIN HEIGHT
+  gridCols=3;
+  gridRows=1;
+  gridGutter=100;
+  gridPMWidth=200;
+  gridPMHeight=600;
+  
+  ModularGrid grid = new ModularGrid(gridCols, gridRows, gridGutter, gridPMWidth, gridPMHeight); // COLUMNS,ROWS GUTTTERSIZE, PAGEMARGIN WIDTH, PAGEMARGIN HEIGHT 
+  
   
   //Nested Grids
   ModularGrid gridN1 = new ModularGrid(10, 10, 10, 0, 0, grid.modules[0][0]); // COLUMNS,ROWS GUTTTERSIZE, PAGEMARGIN WIDTH, PAGEMARGIN HEIGHT, CONTAINER MODULE

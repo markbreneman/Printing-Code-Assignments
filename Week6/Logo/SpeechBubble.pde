@@ -32,8 +32,13 @@ class SpeechBubble
     Bottom=y+h;
 
     canvas.rect(x, y, w, h, r);    
-
-    if (CY>mH/2) {
+    
+//    println("CY= "+ CY);
+//    println("bottom= "+ Bottom);
+//    println("Top= "+ Top);
+//    println("mH/2= "+ mH/2);
+    
+     if (Top>mH/2+gridPMHeight/2) {
 
       //TOP TRIANGLES
       //LEFT
@@ -64,7 +69,7 @@ class SpeechBubble
       }
     }
 
-    else if (CY<mH/2) {
+    else if (Top<mH/2+gridPMHeight/2) {
       //BOTTOM TRIANGLES
      //LEFT
       if (CX>mW/2) {
