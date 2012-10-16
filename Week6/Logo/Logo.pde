@@ -58,39 +58,39 @@ void draw() {
   new SpeechBubble(gridN1.modules[0][0].x, gridN1.modules[0][4].y, gridN1.modules[0][0].w*2, gridN1.modules[0][0].h*3, 80.0, grid.modules[0][0]);
   
   canvas.fill(196.45,100,93.81,.5);
-  new SpeechBubble(gridN1.modules[4][0].x, gridN1.modules[0][2].y, gridN1.modules[0][0].w*(random(2,5)), gridN1.modules[0][0].h*(random(2,2)), 80.0, grid.modules[0][0]);
+  new SpeechBubble(gridN1.modules[4][0].x, gridN1.modules[0][2].y, gridN1.modules[0][0].w*2, gridN1.modules[0][0].h*3, 80.0, grid.modules[0][0]);
   
   canvas.fill(196.45,100,93.81,.25);
-  new SpeechBubble(gridN1.modules[9][0].x, gridN1.modules[0][9].y, gridN1.modules[0][0].w*(random(2,5)), gridN1.modules[0][0].h*(random(2,2)), 80.0, grid.modules[0][0]);
+  new SpeechBubble(gridN1.modules[9][0].x, gridN1.modules[0][9].y, gridN1.modules[0][0].w*3, gridN1.modules[0][0].h*2, 80.0, grid.modules[0][0]);
   
   canvas.fill(0,0,100,1);
   canvas.textAlign(CENTER);
   canvas.textFont(font,300);
-  canvas.text("skype", grid.modules[0][0].w/2, grid.modules[0][0].h/2);
+  canvas.text("skype", grid.modules[0][0].w/2+200, grid.modules[0][0].h/2+600);
   
   
-  ModularGrid gridN2 = new ModularGrid(10, 10, 10, 0, 0, grid.modules[1][0]); // COLUMNS,ROWS GUTTTERSIZE, PAGEMARGIN WIDTH, PAGEMARGIN HEIGHT, CONTAINER MODULE
+//  ModularGrid gridN2 = new ModularGrid(10, 10, 10, 0, 0, grid.modules[1][0]); // COLUMNS,ROWS GUTTTERSIZE, PAGEMARGIN WIDTH, PAGEMARGIN HEIGHT, CONTAINER MODULE
+//  
+//  canvas.fill(87.99,65,73.01,1);
+//  new SpeechBubble(gridN2.modules[0][0].x, gridN2.modules[0][4].y, gridN2.modules[0][0].w*2, gridN2.modules[0][0].h*3, 80.0, grid.modules[1][0]);
+//  
+//  canvas.fill(87.99,65,73.01,.5);
+//  new SpeechBubble(gridN2.modules[4][0].x, gridN2.modules[0][2].y, gridN2.modules[0][0].w*(random(2,5)), gridN2.modules[0][0].h*(random(2,2)), 80.0, grid.modules[1][0]);
+//  
+//  canvas.fill(87.99,65,73.01,.25);
+//  new SpeechBubble(gridN2.modules[9][0].x, gridN2.modules[0][9].y, gridN2.modules[0][0].w*(random(2,5)), gridN2.modules[0][0].h*(random(2,2)), 80.0, grid.modules[1][0]);
   
-  canvas.fill(87.99,65,73.01,1);
-  new SpeechBubble(gridN2.modules[0][0].x, gridN2.modules[0][4].y, gridN2.modules[0][0].w*2, gridN2.modules[0][0].h*3, 80.0, grid.modules[1][0]);
   
-  canvas.fill(87.99,65,73.01,.5);
-  new SpeechBubble(gridN2.modules[4][0].x, gridN2.modules[0][2].y, gridN2.modules[0][0].w*(random(2,5)), gridN2.modules[0][0].h*(random(2,2)), 80.0, grid.modules[1][0]);
+//  ModularGrid gridN3 = new ModularGrid(10, 10, 10, 0, 0, grid.modules[2][0]); // COLUMNS,ROWS GUTTTERSIZE, PAGEMARGIN WIDTH, PAGEMARGIN HEIGHT, CONTAINER MODULE
+//  
+//    canvas.fill(215.23,3.32,52.03,1);
+//  new SpeechBubble(gridN3.modules[0][0].x, gridN3.modules[0][4].y, gridN3.modules[0][0].w*2, gridN3.modules[0][0].h*3, 80.0, grid.modules[2][0]);
   
-  canvas.fill(87.99,65,73.01,.25);
-  new SpeechBubble(gridN2.modules[9][0].x, gridN2.modules[0][9].y, gridN2.modules[0][0].w*(random(2,5)), gridN2.modules[0][0].h*(random(2,2)), 80.0, grid.modules[1][0]);
-  
-  
-  ModularGrid gridN3 = new ModularGrid(10, 10, 10, 0, 0, grid.modules[2][0]); // COLUMNS,ROWS GUTTTERSIZE, PAGEMARGIN WIDTH, PAGEMARGIN HEIGHT, CONTAINER MODULE
-  
-    canvas.fill(215.23,3.32,52.03,1);
-  new SpeechBubble(gridN3.modules[0][0].x, gridN3.modules[0][4].y, gridN3.modules[0][0].w*2, gridN3.modules[0][0].h*3, 80.0, grid.modules[2][0]);
-  
-  canvas.fill(215.23,3.32,52.03,1);
-  new SpeechBubble(gridN3.modules[4][0].x, gridN3.modules[0][2].y, gridN3.modules[0][0].w*(random(2,5)), gridN3.modules[0][0].h*(random(2,2)), 80.0, grid.modules[2][0]);
-  
-  canvas.fill(215.23,3.32,52.03,1);
-  new SpeechBubble(gridN3.modules[9][0].x, gridN3.modules[0][9].y, gridN3.modules[0][0].w*(random(2,5)), gridN3.modules[0][0].h*(random(2,2)), 80.0, grid.modules[2][0]);
+//  canvas.fill(215.23,3.32,52.03,1);
+//  new SpeechBubble(gridN3.modules[4][0].x, gridN3.modules[0][2].y, gridN3.modules[0][0].w*(random(2,5)), gridN3.modules[0][0].h*(random(2,2)), 80.0, grid.modules[2][0]);
+//  
+//  canvas.fill(215.23,3.32,52.03,1);
+//  new SpeechBubble(gridN3.modules[9][0].x, gridN3.modules[0][9].y, gridN3.modules[0][0].w*(random(2,5)), gridN3.modules[0][0].h*(random(2,2)), 80.0, grid.modules[2][0]);
   
   
   //Show the Compartmentalized logo space
@@ -99,14 +99,14 @@ void draw() {
   if (gridShow==true)
   {
     gridN1.display();
-    gridN2.display();
-    gridN3.display();
+//    gridN2.display();
+//    gridN3.display();
     
   }
 
   if (gridShow==false && showing.equals("Not Showing"))
   {
-//  canvas.stroke(0,0,0,.3);
+  canvas.stroke(0,0,0,.3);
   }
 
   canvas.endDraw();
