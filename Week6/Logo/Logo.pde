@@ -1,6 +1,7 @@
 PGraphics canvas;
 PFont font;
 
+
 //Dimensions of Plotter Paper in Inches
 float paper_width = 20;
 float paper_height = 10;
@@ -17,8 +18,20 @@ float ratio = 1;
 Boolean gridShow=false;
 String showing="Not Showing";
 
+//CONTROL P5 Addition
+import controlP5.*;
+ControlP5 controlP5;
+ControlWindow controlWindow;
+Slider2D speechBubble;
+Slider S1;
+Slider S2;
+int speechHeight;
+int speechWidth;
+//int SpeechBubble1;
 
 void setup() {
+  
+
   //I like to work with a display that is the same aspect ratio as the paper 
   //I set a width and the height corresponds
   int width = 800;//Change this number to get a display window with papers aspect ratio
@@ -32,11 +45,30 @@ void setup() {
   canvas = createGraphics(canvas_width, canvas_height);
   calculateResizeRatio();
   
+  //SETUP CONTROL P5 CONTROLS
+  controlP5 = new ControlP5(this);
+  controlWindow = controlP5.addControlWindow("controlP5window",325,540,400,200);
+  controlWindow.hideCoordinates();
+  controlWindow.setTitle("Logo Controls");
+  
+  speechBubble = controlP5.addSlider2D("SpeechBubble1",0,9,0,9,5,5,10,10,100,100);
+  speechBubble.setArrayValue(new float[] {4.5, 4.5});  
+  speechBubble.setWindow(controlWindow);
+  
+  S1 = controlP5.addSlider("speechHeight",0,10,200,40,100,10);
+  S1.setNumberOfTickMarks(10);
+  S1.setSliderMode(Slider.FLEXIBLE);
+  S1.setWindow(controlWindow);
+  
+  S2 = controlP5.addSlider("speechWidth",0,10,200,80,100,10);
+  S2.setNumberOfTickMarks(10);
+  S2.setSliderMode(Slider.FLEXIBLE);
+  S2.setWindow(controlWindow);
  
 }
 
 void draw() {
- 
+  println(speechHeight);
   canvas.beginDraw();
   canvas.colorMode(HSB, 360, 100, 100, 1);
   canvas.background(0,0,100, .5);
@@ -55,13 +87,15 @@ void draw() {
   
 //  rect(a, b, c, d, r)
   canvas.fill(196.45,100,93.81,1);
-  new SpeechBubble(gridN1.modules[0][0].x, gridN1.modules[0][4].y, gridN1.modules[0][0].w*2, gridN1.modules[0][0].h*3, 80.0, grid.modules[0][0]);
+//  new SpeechBubble(gridN1.modules[0][0].x, gridN1.modules[0][4].y, gridN1.modules[0][0].w*2, gridN1.modules[0][0].h*3, 80.0, grid.modules[0][0]);
+  new SpeechBubble(gridN1.modules[int(speechBubble.arrayValue()[0])][0].x, gridN1.modules[0][int(speechBubble.arrayValue()[1])].y, gridN1.modules[0][0].w*speechWidth, gridN1.modules[0][0].h*speechHeight, 80.0, grid.modules[0][0]);
   
-  canvas.fill(196.45,100,93.81,.5);
-  new SpeechBubble(gridN1.modules[4][0].x, gridN1.modules[0][2].y, gridN1.modules[0][0].w*2, gridN1.modules[0][0].h*3, 80.0, grid.modules[0][0]);
   
-  canvas.fill(196.45,100,93.81,.25);
-  new SpeechBubble(gridN1.modules[9][0].x, gridN1.modules[0][9].y, gridN1.modules[0][0].w*3, gridN1.modules[0][0].h*2, 80.0, grid.modules[0][0]);
+//  canvas.fill(196.45,100,93.81,.5);
+//  new SpeechBubble(gridN1.modules[4][0].x, gridN1.modules[0][2].y, gridN1.modules[0][0].w*2, gridN1.modules[0][0].h*3, 80.0, grid.modules[0][0]);
+//  
+//  canvas.fill(196.45,100,93.81,.25);
+//  new SpeechBubble(gridN1.modules[9][0].x, gridN1.modules[0][9].y, gridN1.modules[0][0].w*3, gridN1.modules[0][0].h*2, 80.0, grid.modules[0][0]);
   
   canvas.fill(0,0,100,1);
   canvas.textAlign(CENTER);
@@ -134,22 +168,29 @@ void calculateResizeRatio()
 
 void keyPressed()
 {
+  //SAVE IMAGES OUT
   if (key == 's')
   {  
     println("Saving Image");
     canvas.save("image_" + year() + "_" + month()+ "_" + day() + "_" + hour() + "_" + minute() + "_" + second() + ".tiff");
     println("Saved Image");
   }
-
+  
+  //SHOW GRID
   if (key == 'g')
   {  
     gridShow=!gridShow;
     if (showing.equals("Not Showing")) {
       showing="Showing Grid";
+      println(showing);
     }
     else if (showing.equals("Showing Grid")) {
       showing="Not Showing";
     }
   }
-  println(showing);
+  
+ //CONTROL P5 HIDE-SHOW 
+  if(key==',') controlP5.window("controlP5window").hide();
+  if(key=='.') controlP5.window("controlP5window").show();
+  
 }
