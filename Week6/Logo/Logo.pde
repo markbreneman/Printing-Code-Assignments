@@ -63,12 +63,12 @@ void setup() {
   speechBubble.setArrayValue(new float[] {4.5, 4.5});  
   speechBubble.setWindow(controlWindow);
   
-  S1 = controlP5.addSlider("speechHeight",0,10,200,40,100,10);
+  S1 = controlP5.addSlider("speechHeight",0,10,5,200,40,100,10);
   S1.setNumberOfTickMarks(10);
   S1.setSliderMode(Slider.FLEXIBLE);
   S1.setWindow(controlWindow);
   
-  S2 = controlP5.addSlider("speechWidth",0,10,200,80,100,10);
+  S2 = controlP5.addSlider("speechWidth",0,10,5,200,80,100,10);
   S2.setNumberOfTickMarks(10);
   S2.setSliderMode(Slider.FLEXIBLE);
   S2.setWindow(controlWindow);
@@ -206,4 +206,12 @@ void keyPressed()
   if(key==',') controlP5.window("controlP5window").hide();
   if(key=='.') controlP5.window("controlP5window").show();
   
+}
+
+void mousePressed(){
+
+
+
+
+
 }
