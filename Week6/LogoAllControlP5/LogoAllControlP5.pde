@@ -67,6 +67,12 @@ void setup() {
   canvas = createGraphics(canvas_width, canvas_height);
   calculateResizeRatio();
   
+  //SETUP CONTROL P5 CONTROLS
+  controlP5 = new ControlP5(this);
+  controlWindow = controlP5.addControlWindow("controlP5window",325,540,400,600);
+  controlWindow.hideCoordinates();
+  controlWindow.setTitle("Logo Controls");
+  
   initControls();
 
 }
@@ -200,11 +206,7 @@ void mousePressed(){
 }
 
 void initControls(){
-//SETUP CONTROL P5 CONTROLS
-  controlP5 = new ControlP5(this);
-  controlWindow = controlP5.addControlWindow("controlP5window",325,540,400,600);
-  controlWindow.hideCoordinates();
-  controlWindow.setTitle("Logo Controls");
+
   
   //CONTROL SET1
   speechBubble1 = controlP5.addSlider2D("SpeechBubble1",0,gridN1Cols-1,0,gridN1Rows-1,gridN1Cols/2,gridN1Rows/2,10,10,100,100);

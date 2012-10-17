@@ -103,8 +103,9 @@ class SpeechBubble
       x+w-offsetW-(random(-75,0)), Bottom+offsetH*2
         );
       }
-      
     }
+    
+    
   }
 }
 
