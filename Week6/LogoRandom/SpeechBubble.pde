@@ -11,11 +11,11 @@ class SpeechBubble
   float Bottom;
   float mW;//Containing Module Width
   float mH;//Containing Module Height
-  //  boolean used = false;
+  float triPos;
 
-  //  Speech() {}
+  
 
-  SpeechBubble(float _x, float _y, float _w, float _h, float _r, Module _module)
+  SpeechBubble(float _x, float _y, float _w, float _h, float _r, Module _module, int _tri)
   {
     x = _x;
     y = _y;
@@ -26,6 +26,7 @@ class SpeechBubble
     mH = _module.h;
     float offsetW = w*.125;
     float offsetH = h*.35;
+    triPos= _tri;
 
     CX=x+w/2;
     CY=y+h/2;
@@ -35,68 +36,53 @@ class SpeechBubble
     canvas.rect(x, y, w, h, r);    
     
       
-     if (Top>mH/2+gridPMHeight/2) {
-
-      //TOP TRIANGLES
-      //LEFT
-      if (CX<mW*5/12+gridPMWidth/2) {
-        canvas.triangle(
-        x+offsetW, Top, 
-        x+offsetW*3, Top, 
-        x+offsetW+(random(-100,-0)), Top-offsetH*2
-          );
-      }
-
-      //CENTER
-      if (CX>mW*5/12+gridPMWidth/2 && CX<mW*9/12+gridPMWidth/2) {
-        canvas.triangle(
-        CX-offsetW, Top, 
-        CX+offsetW, Top, 
-        CX, Top-offsetH*2
-          );
-      }
-
-      //RIGHT
-      if (CX>mW*9/12+gridPMWidth/2) {
-        canvas.triangle(
-        x+w-offsetW*3, Top, 
-        x+w-offsetW, Top, 
-        x+w-offsetW-(random(-100,-0)), Top-offsetH*2
-          );
-      }
+    if (triPos==1) {
+    canvas.triangle(
+    x+offsetW, Top, 
+    x+offsetW*3, Top, 
+    x+offsetW+(random(-100,-0)), Top-offsetH*2
+    );
     }
 
-    else if (Top<mH/2+gridPMHeight/2) {
-      //BOTTOM TRIANGLES
-     //LEFT
-      if (CX<mW*5/12+gridPMWidth/2) {
-      canvas.triangle(
-      x+offsetW, Bottom, 
-      x+offsetW*3, Bottom, 
-      x+offsetW+(random(-100,-0)), Bottom+offsetH*2
-        );
-      }
-      
-      //CENTER
-      if (CX>mW*5/12+gridPMWidth/2 && CX<mW*9/12+gridPMWidth/2) {
-      canvas.triangle(
-      CX-offsetW, Bottom, 
-      CX+offsetW, Bottom, 
-      CX, Bottom+offsetH*2
-        );
-      }
-      
-      //RIGHT
-      if (CX>mW*9/12+gridPMWidth/2) {
-      canvas.triangle(
-      x+w-offsetW*3, Bottom, 
-      x+w-offsetW, Bottom, 
-      x+w-offsetW-(random(-100,-0)), Bottom+offsetH*2
-        );
-      }
+    else if(triPos==2){
+    canvas.triangle(
+    CX-offsetW, Top, 
+    CX+offsetW, Top, 
+    CX, Top-offsetH*2
+    );
     }
-    
-    
+
+    else if(triPos==3){
+    canvas.triangle(
+    x+w-offsetW*3, Top, 
+    x+w-offsetW, Top, 
+    x+w-offsetW-(random(-100,-0)), Top-offsetH*2
+    );
+    }
+
+    else if(triPos==4){
+    canvas.triangle(
+    x+offsetW, Bottom, 
+    x+offsetW*3, Bottom, 
+    x+offsetW+(random(-100,-0)), Bottom+offsetH*2
+    );
+    }
+
+    else if(triPos==5){
+    canvas.triangle(
+    CX-offsetW, Bottom, 
+    CX+offsetW, Bottom, 
+    CX, Bottom+offsetH*2
+    );
+    }
+
+    else if(triPos==6){
+    canvas.triangle(
+    x+w-offsetW*3, Bottom, 
+    x+w-offsetW, Bottom, 
+    x+w-offsetW-(random(-100,-0)), Bottom+offsetH*2
+    );
+    }
   }
 }
 

@@ -105,18 +105,14 @@ void mousePressed(){
   ModularGrid gridN1 = new ModularGrid(gridN1Cols, gridN1Rows, gridN1Gutter,gridN1PMWidth, gridN1PMHeight, grid.modules[0][0]); // COLUMNS,ROWS GUTTTERSIZE, PAGEMARGIN WIDTH, PAGEMARGIN HEIGHT, CONTAINER MODULE
   
   canvas.noStroke();
-//  rect(a, b, c, d, r)
   canvas.fill(196.45,100,93.81,1);
-//  new SpeechBubble(gridN1.modules[int(speechBubble1.arrayValue()[0])][0].x, gridN1.modules[0][int(speechBubble1.arrayValue()[1])].y, gridN1.modules[0][0].w*speechWidth1, gridN1.modules[0][0].h*speechHeight1, 80.0, grid.modules[0][0]);
-   new SpeechBubble(gridN1.modules[int(random(0,12))][int(random(0,7))].x,gridN1.modules[int(random(0,12))][int(random(0,12))].y, gridN1.modules[0][0].w*(int(random(10,17))), gridN1.modules[0][0].h*(int(random(7,10))), 80.0, grid.modules[0][0]);
+   new SpeechBubble(gridN1.modules[int(random(0,12))][int(random(0,7))].x,gridN1.modules[int(random(0,12))][int(random(0,12))].y, gridN1.modules[0][0].w*(int(random(10,17))), gridN1.modules[0][0].h*(int(random(7,10))), 80.0, grid.modules[0][0], int(random(1,6)));
   
   canvas.fill(196.45,100,93.81,.5);
-//  new SpeechBubble(gridN1.modules[int(speechBubble2.arrayValue()[0])][0].x, gridN1.modules[0][int(speechBubble2.arrayValue()[1])].y, gridN1.modules[0][0].w*speechWidth2, gridN1.modules[0][0].h*speechHeight2, 80.0, grid.modules[0][0]);
-   new SpeechBubble(gridN1.modules[int(random(0,12))][int(random(0,7))].x,gridN1.modules[int(random(0,12))][int(random(0,12))].y, gridN1.modules[0][0].w*(int(random(10,17))), gridN1.modules[0][0].h*(int(random(7,10))), 80.0, grid.modules[0][0]);
+   new SpeechBubble(gridN1.modules[int(random(0,12))][int(random(0,7))].x,gridN1.modules[int(random(0,12))][int(random(0,12))].y, gridN1.modules[0][0].w*(int(random(10,17))), gridN1.modules[0][0].h*(int(random(7,10))), 80.0, grid.modules[0][0],int(random(1,6)));
 
   canvas.fill(196.45,100,93.81,.25);
-//  new SpeechBubble(gridN1.modules[int(speechBubble3.arrayValue()[0])][0].x, gridN1.modules[0][int(speechBubble3.arrayValue()[1])].y, gridN1.modules[0][0].w*speechWidth3, gridN1.modules[0][0].h*speechHeight3, 80.0, grid.modules[0][0]);
-  new SpeechBubble(gridN1.modules[int(random(0,12))][int(random(0,7))].x,gridN1.modules[int(random(0,12))][int(random(0,12))].y, gridN1.modules[0][0].w*(int(random(10,17))), gridN1.modules[0][0].h*(int(random(7,10))), 80.0, grid.modules[0][0]);
+  new SpeechBubble(gridN1.modules[int(random(0,12))][int(random(0,7))].x,gridN1.modules[int(random(0,12))][int(random(0,12))].y, gridN1.modules[0][0].w*(int(random(10,17))), gridN1.modules[0][0].h*(int(random(7,10))), 80.0, grid.modules[0][0], int(random(1,6)));
   
   canvas.fill(0,0,100,1);
   canvas.textAlign(CENTER);
@@ -131,15 +127,15 @@ void mousePressed(){
 //  rect(a, b, c, d, r)
    canvas.fill(87.99,65,73.01,1);
 //  new SpeechBubble(gridN2.modules[int(speechBubble1.arrayValue()[0])][0].x, gridN2.modules[0][int(speechBubble1.arrayValue()[1])].y, gridN2.modules[0][0].w*speechWidth1, gridN2.modules[0][0].h*speechHeight1, 80.0, grid.modules[1][0]);
-   new SpeechBubble(gridN2.modules[int(random(0,12))][int(random(0,7))].x,gridN2.modules[int(random(0,12))][int(random(0,12))].y, gridN2.modules[0][0].w*(int(random(10,17))), gridN2.modules[0][0].h*(int(random(7,10))), 80.0, grid.modules[1][0]);
+   new SpeechBubble(gridN2.modules[int(random(0,12))][int(random(0,7))].x,gridN2.modules[int(random(0,12))][int(random(0,12))].y, gridN2.modules[0][0].w*(int(random(10,17))), gridN2.modules[0][0].h*(int(random(7,10))), 80.0, grid.modules[1][0],int(random(1,6)));
   
    canvas.fill(87.99,65,73.01,.5);
 //  new SpeechBubble(gridN2.modules[int(speechBubble2.arrayValue()[0])][0].x, gridN2.modules[0][int(speechBubble2.arrayValue()[1])].y, gridN2.modules[0][0].w*speechWidth2, gridN2.modules[0][0].h*speechHeight2, 80.0, grid.modules[1][0]);
-   new SpeechBubble(gridN2.modules[int(random(0,12))][int(random(0,7))].x,gridN2.modules[int(random(0,12))][int(random(0,12))].y, gridN2.modules[0][0].w*(int(random(10,17))), gridN2.modules[0][0].h*(int(random(7,10))), 80.0, grid.modules[1][0]);
+   new SpeechBubble(gridN2.modules[int(random(0,12))][int(random(0,7))].x,gridN2.modules[int(random(0,12))][int(random(0,12))].y, gridN2.modules[0][0].w*(int(random(10,17))), gridN2.modules[0][0].h*(int(random(7,10))), 80.0, grid.modules[1][0],int(random(1,6)));
 
    canvas.fill(87.99,65,73.01,.25);
 //  new SpeechBubble(gridN2.modules[int(speechBubble3.arrayValue()[0])][0].x, gridN2.modules[0][int(speechBubble3.arrayValue()[1])].y, gridN2.modules[0][0].w*speechWidth3, gridN2.modules[0][0].h*speechHeight3, 80.0, grid.modules[1][0]);
-  new SpeechBubble(gridN2.modules[int(random(0,12))][int(random(0,7))].x,gridN2.modules[int(random(0,12))][int(random(0,12))].y, gridN2.modules[0][0].w*(int(random(10,17))), gridN2.modules[0][0].h*(int(random(7,10))), 80.0, grid.modules[1][0]);
+  new SpeechBubble(gridN2.modules[int(random(0,12))][int(random(0,7))].x,gridN2.modules[int(random(0,12))][int(random(0,12))].y, gridN2.modules[0][0].w*(int(random(10,17))), gridN2.modules[0][0].h*(int(random(7,10))), 80.0, grid.modules[1][0],int(random(1,6)));
   
   canvas.fill(0,0,100,1);
   canvas.textAlign(CENTER);
@@ -154,13 +150,13 @@ void mousePressed(){
   canvas.noStroke();
 
   canvas.fill(215.23,3.32,52.03,1); 
-  new SpeechBubble(gridN3.modules[int(random(0,12))][int(random(0,7))].x,gridN3.modules[int(random(0,12))][int(random(0,12))].y, gridN3.modules[0][0].w*(int(random(10,17))), gridN3.modules[0][0].h*(int(random(7,10))), 80.0, grid.modules[2][0]);
+  new SpeechBubble(gridN3.modules[int(random(0,12))][int(random(0,7))].x,gridN3.modules[int(random(0,12))][int(random(0,12))].y, gridN3.modules[0][0].w*(int(random(10,17))), gridN3.modules[0][0].h*(int(random(7,10))), 80.0, grid.modules[2][0],int(random(1,6)));
   
   canvas.fill(215.23,3.32,52.03,.5); 
-  new SpeechBubble(gridN3.modules[int(random(0,12))][int(random(0,7))].x,gridN3.modules[int(random(0,12))][int(random(0,12))].y, gridN3.modules[0][0].w*(int(random(10,17))), gridN3.modules[0][0].h*(int(random(7,10))), 80.0, grid.modules[2][0]);
+  new SpeechBubble(gridN3.modules[int(random(0,12))][int(random(0,7))].x,gridN3.modules[int(random(0,12))][int(random(0,12))].y, gridN3.modules[0][0].w*(int(random(10,17))), gridN3.modules[0][0].h*(int(random(7,10))), 80.0, grid.modules[2][0],int(random(1,6)));
 
   canvas.fill(215.23,3.32,52.03,.25); 
-  new SpeechBubble(gridN3.modules[int(random(0,12))][int(random(0,7))].x,gridN3.modules[int(random(0,12))][int(random(0,12))].y, gridN3.modules[0][0].w*(int(random(10,17))), gridN3.modules[0][0].h*(int(random(7,10))), 80.0, grid.modules[2][0]);
+  new SpeechBubble(gridN3.modules[int(random(0,12))][int(random(0,7))].x,gridN3.modules[int(random(0,12))][int(random(0,12))].y, gridN3.modules[0][0].w*(int(random(10,17))), gridN3.modules[0][0].h*(int(random(7,10))), 80.0, grid.modules[2][0],int(random(1,6)));
   
   canvas.fill(0,0,100,1);
   canvas.textAlign(CENTER);
