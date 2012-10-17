@@ -34,15 +34,6 @@ class SpeechBubble
 
     canvas.rect(x, y, w, h, r);    
     
-//    println("CY= "+ CY);
-//    println("bottom= "+ Bottom);
-//    println("Top= "+ Top);
-//    println("mH= "+ mH);
-//    println("mW= "+ mW);
-//      println("CX= "+ CX);
-//      println("Break1= "+ mW*5/12+gridPMWidth/2);
-//      println("Break2= "+ mW*7/12+gridPMWidth/2);
-//      
       
      if (Top>mH/2+gridPMHeight/2) {
 
@@ -52,7 +43,7 @@ class SpeechBubble
         canvas.triangle(
         x+offsetW, Top, 
         x+offsetW*3, Top, 
-        x+offsetW+(random(-75,0)), Top-offsetH*2
+        x+offsetW+(random(-100,-0)), Top-offsetH*2
           );
       }
 
@@ -70,7 +61,7 @@ class SpeechBubble
         canvas.triangle(
         x+w-offsetW*3, Top, 
         x+w-offsetW, Top, 
-        x+w-offsetW-(random(-75,0)), Top-offsetH*2
+        x+w-offsetW-(random(-100,-0)), Top-offsetH*2
           );
       }
     }
@@ -82,7 +73,7 @@ class SpeechBubble
       canvas.triangle(
       x+offsetW, Bottom, 
       x+offsetW*3, Bottom, 
-      x+offsetW+(random(-75,0)), Bottom+offsetH*2
+      x+offsetW+(random(-100,-0)), Bottom+offsetH*2
         );
       }
       
@@ -100,7 +91,7 @@ class SpeechBubble
       canvas.triangle(
       x+w-offsetW*3, Bottom, 
       x+w-offsetW, Bottom, 
-      x+w-offsetW-(random(-75,0)), Bottom+offsetH*2
+      x+w-offsetW-(random(-100,-0)), Bottom+offsetH*2
         );
       }
     }
