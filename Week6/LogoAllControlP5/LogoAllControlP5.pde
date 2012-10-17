@@ -19,7 +19,7 @@ float ratio = 1;
 int gridCols=3;
 int gridRows=1;
 int gridGutter=100;
-int gridPMWidth=200;
+int gridPMWidth=120;
 int gridPMHeight=600;
 
 int gridN1Cols=20;
@@ -51,15 +51,23 @@ Slider S3;
 Slider S4;
 Slider S5;
 Slider S6;
+Slider S7;
+Slider S8;
+Slider S9;
 
-int speechHeight1;
-int speechWidth1;
-int speechHeight2;
-int speechWidth2;
-int speechHeight3;
-int speechWidth3;
+int triOptions=6;
 
-SpeechBubble res1;
+int Speech_Bubble_1_Height;
+int Speech_Bubble_1_Width;
+int Speech_Bubble_1_Triangle_Position;
+
+int Speech_Bubble_2_Height;
+int Speech_Bubble_2_Width;
+int Speech_Bubble_2_Triangle_Position;
+
+int Speech_Bubble_3_Height;
+int Speech_Bubble_3_Width;
+int Speech_Bubble_3_Triangle_Position;
 
 ModularGrid grid;
 ModularGrid gridN1;
@@ -139,18 +147,18 @@ void draw() {
   if (selected1 == true) {   
     speechbubbles[0].x=int(gridN1.modules[int(speechBubble1.arrayValue()[0])][0].x);
     speechbubbles[0].y=int(gridN1.modules[0][int(speechBubble1.arrayValue()[1])].y);
-    speechbubbles[0].w=int(gridN1.modules[0][0].w*speechWidth1); 
-    speechbubbles[0].h=int(gridN1.modules[0][0].h*speechHeight1);
+    speechbubbles[0].w=int(gridN1.modules[0][0].w*Speech_Bubble_1_Width); 
+    speechbubbles[0].h=int(gridN1.modules[0][0].h*Speech_Bubble_1_Height);
 
     speechbubbles[1].x=int(gridN1.modules[int(speechBubble2.arrayValue()[0])][0].x);
     speechbubbles[1].y=int(gridN1.modules[0][int(speechBubble2.arrayValue()[1])].y);
-    speechbubbles[1].w=int(gridN1.modules[0][0].w*speechWidth2); 
-    speechbubbles[1].h=int(gridN1.modules[0][0].h*speechHeight2);
+    speechbubbles[1].w=int(gridN1.modules[0][0].w*Speech_Bubble_2_Width); 
+    speechbubbles[1].h=int(gridN1.modules[0][0].h*Speech_Bubble_2_Height);
 
     speechbubbles[2].x=int(gridN1.modules[int(speechBubble3.arrayValue()[0])][0].x);
     speechbubbles[2].y=int(gridN1.modules[0][int(speechBubble3.arrayValue()[1])].y);
-    speechbubbles[2].w=int(gridN1.modules[0][0].w*speechWidth3); 
-    speechbubbles[2].h=int(gridN1.modules[0][0].h*speechHeight3);
+    speechbubbles[2].w=int(gridN1.modules[0][0].w*Speech_Bubble_3_Width); 
+    speechbubbles[2].h=int(gridN1.modules[0][0].h*Speech_Bubble_3_Height);
   }
 
   if  (selectedCanvas.equals("Canvas 2") == true) {
@@ -162,18 +170,18 @@ void draw() {
   if (selected2 == true) {   
     speechbubbles[3].x=int(gridN2.modules[int(speechBubble1.arrayValue()[0])][0].x);
     speechbubbles[3].y=int(gridN2.modules[0][int(speechBubble1.arrayValue()[1])].y);
-    speechbubbles[3].w=int(gridN2.modules[0][0].w*speechWidth1); 
-    speechbubbles[3].h=int(gridN2.modules[0][0].h*speechHeight1);
+    speechbubbles[3].w=int(gridN2.modules[0][0].w*Speech_Bubble_1_Width); 
+    speechbubbles[3].h=int(gridN2.modules[0][0].h*Speech_Bubble_1_Height);
 
     speechbubbles[4].x=int(gridN2.modules[int(speechBubble2.arrayValue()[0])][0].x);
     speechbubbles[4].y=int(gridN2.modules[0][int(speechBubble2.arrayValue()[1])].y);
-    speechbubbles[4].w=int(gridN2.modules[0][0].w*speechWidth2); 
-    speechbubbles[4].h=int(gridN2.modules[0][0].h*speechHeight2);
+    speechbubbles[4].w=int(gridN2.modules[0][0].w*Speech_Bubble_2_Width); 
+    speechbubbles[4].h=int(gridN2.modules[0][0].h*Speech_Bubble_2_Height);
 
     speechbubbles[5].x=int(gridN2.modules[int(speechBubble3.arrayValue()[0])][0].x);
     speechbubbles[5].y=int(gridN2.modules[0][int(speechBubble3.arrayValue()[1])].y);
-    speechbubbles[5].w=int(gridN2.modules[0][0].w*speechWidth3); 
-    speechbubbles[5].h=int(gridN2.modules[0][0].h*speechHeight3);
+    speechbubbles[5].w=int(gridN2.modules[0][0].w*Speech_Bubble_3_Width); 
+    speechbubbles[5].h=int(gridN2.modules[0][0].h*Speech_Bubble_3_Height);
   }  
 
 
@@ -186,18 +194,18 @@ void draw() {
   if (selected3 == true) {   
     speechbubbles[6].x=int(gridN3.modules[int(speechBubble1.arrayValue()[0])][0].x);
     speechbubbles[6].y=int(gridN3.modules[0][int(speechBubble1.arrayValue()[1])].y);
-    speechbubbles[6].w=int(gridN3.modules[0][0].w*speechWidth1); 
-    speechbubbles[6].h=int(gridN3.modules[0][0].h*speechHeight1);
+    speechbubbles[6].w=int(gridN3.modules[0][0].w*Speech_Bubble_1_Width); 
+    speechbubbles[6].h=int(gridN3.modules[0][0].h*Speech_Bubble_1_Height);
 
     speechbubbles[7].x=int(gridN3.modules[int(speechBubble2.arrayValue()[0])][0].x);
     speechbubbles[7].y=int(gridN3.modules[0][int(speechBubble2.arrayValue()[1])].y);
-    speechbubbles[7].w=int(gridN3.modules[0][0].w*speechWidth2); 
-    speechbubbles[7].h=int(gridN3.modules[0][0].h*speechHeight2);
+    speechbubbles[7].w=int(gridN3.modules[0][0].w*Speech_Bubble_2_Width); 
+    speechbubbles[7].h=int(gridN3.modules[0][0].h*Speech_Bubble_2_Height);
 
     speechbubbles[8].x=int(gridN3.modules[int(speechBubble3.arrayValue()[0])][0].x);
     speechbubbles[8].y=int(gridN3.modules[0][int(speechBubble3.arrayValue()[1])].y);
-    speechbubbles[8].w=int(gridN3.modules[0][0].w*speechWidth3); 
-    speechbubbles[8].h=int(gridN3.modules[0][0].h*speechHeight3);
+    speechbubbles[8].w=int(gridN3.modules[0][0].w*Speech_Bubble_3_Width); 
+    speechbubbles[8].h=int(gridN3.modules[0][0].h*Speech_Bubble_3_Height);
   }  
   
   for (int i=0; i<=8; i++) {
@@ -328,15 +336,20 @@ void initControls() {
   speechBubble1.setWindow(controlWindow);
 
 
-  S1 = controlP5.addSlider("speechHeight1", 0, gridN1Cols, gridN1Cols/2, 200, 10, 100, 10);
+  S1 = controlP5.addSlider("Speech_Bubble_1_Height", 0, gridN1Cols, gridN1Cols/2, 120, 10, 100, 10);
   S1.setNumberOfTickMarks(gridN1Cols);
   S1.setSliderMode(Slider.FLEXIBLE);
   S1.setWindow(controlWindow);
 
-  S2 = controlP5.addSlider("speechWidth1", 0, gridN1Rows, gridN1Rows/2, 200, 50, 100, 10);
+  S2 = controlP5.addSlider("Speech_Bubble_1_Width", 0, gridN1Rows, gridN1Rows/2, 120, 50, 100, 10);
   S2.setNumberOfTickMarks(gridN1Rows);
   S2.setSliderMode(Slider.FLEXIBLE);
   S2.setWindow(controlWindow);
+  
+  S3 = controlP5.addSlider("Speech_Bubble_1_Triangle_Position", 0, triOptions, triOptions/2, 120, 90, 100, 10);
+  S3.setNumberOfTickMarks(triOptions);
+  S3.setSliderMode(Slider.FLEXIBLE);
+  S3.setWindow(controlWindow);
 
   //CONTROL SET2
   speechBubble2 = controlP5.addSlider2D("Speech Bubble 2", 0, gridN1Cols-1, 0, gridN1Rows-1, gridN1Cols/2, gridN1Rows/2, 10, 140, 100, 100);
@@ -346,15 +359,20 @@ void initControls() {
   );
   speechBubble2.setWindow(controlWindow);
 
-  S3 = controlP5.addSlider("speechHeight2", 0, gridN1Cols, gridN1Cols/2, 200, 140, 100, 10);
-  S3.setNumberOfTickMarks(gridN1Cols);
-  S3.setSliderMode(Slider.FLEXIBLE);
-  S3.setWindow(controlWindow);
-
-  S4 = controlP5.addSlider("speechWidth2", 0, gridN1Rows, gridN1Rows/2, 200, 180, 100, 10);
-  S4.setNumberOfTickMarks(gridN1Rows);
+  S4 = controlP5.addSlider("Speech_Bubble_2_Height", 0, gridN1Cols, gridN1Cols/2, 120, 140, 100, 10);
+  S4.setNumberOfTickMarks(gridN1Cols);
   S4.setSliderMode(Slider.FLEXIBLE);
   S4.setWindow(controlWindow);
+
+  S5 = controlP5.addSlider("Speech_Bubble_2_Width", 0, gridN1Rows, gridN1Rows/2, 120, 180, 100, 10);
+  S5.setNumberOfTickMarks(gridN1Rows);
+  S5.setSliderMode(Slider.FLEXIBLE);
+  S5.setWindow(controlWindow);
+  
+  S6 = controlP5.addSlider("Speech_Bubble_2_Triangle_Position", 0, triOptions, triOptions/2, 120, 220, 100, 10);
+  S6.setNumberOfTickMarks(triOptions);
+  S6.setSliderMode(Slider.FLEXIBLE);
+  S6.setWindow(controlWindow);
 
   //CONTROL SET3
   speechBubble3 = controlP5.addSlider2D("Speech Bubble 3", 0, gridN1Cols-1, 0, gridN1Rows-1, gridN1Cols/2, gridN1Rows/2, 10, 280, 100, 100);
@@ -364,15 +382,21 @@ void initControls() {
   ); 
   speechBubble3.setWindow(controlWindow);
 
-  S5 = controlP5.addSlider("speechHeight3", 0, gridN1Cols, gridN1Cols/2, 200, 280, 100, 10);
-  S5.setNumberOfTickMarks(gridN1Cols);
-  S5.setSliderMode(Slider.FLEXIBLE);
-  S5.setWindow(controlWindow);
+  S7 = controlP5.addSlider("Speech_Bubble_3_Height", 0, gridN1Cols, gridN1Cols/2, 120, 280, 100, 10);
+  S7.setNumberOfTickMarks(gridN1Cols);
+  S7.setSliderMode(Slider.FLEXIBLE);
+  S7.setWindow(controlWindow);
 
-  S6 = controlP5.addSlider("speechWidth3", 0, gridN1Rows, gridN1Rows/2, 200, 320, 100, 10);
-  S6.setNumberOfTickMarks(gridN1Rows);
-  S6.setSliderMode(Slider.FLEXIBLE);
-  S6.setWindow(controlWindow);
+  S8 = controlP5.addSlider("Speech_Bubble_3_Width", 0, gridN1Rows, gridN1Rows/2, 120, 320, 100, 10);
+  S8.setNumberOfTickMarks(gridN1Rows);
+  S8.setSliderMode(Slider.FLEXIBLE);
+  S8.setWindow(controlWindow);
+
+  S9 = controlP5.addSlider("Speech_Bubble_3_Triangle_Position", 0, triOptions, triOptions/2, 120, 360, 100, 10);
+  S9.setNumberOfTickMarks(triOptions);
+  S9.setSliderMode(Slider.FLEXIBLE);
+  S9.setWindow(controlWindow);
+  
 }
 
 void controlEvent(ControlEvent theEvent) {

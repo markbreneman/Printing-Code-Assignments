@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"Speech_Bubble_3_",
+				"Speech_Bubble_3_Triangle_Position"
+			],
+			[
+				"speechTri",
+				"speechTri1"
+			],
+			[
 				"A",
 				"ASTRONAUT"
 			],
@@ -15,6 +23,14 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "LogoAllControlP5.pde",
+			"settings":
+			{
+				"buffer_size": 14182,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "Packages/Processing/Processing.sublime-build",
 	"command_palette":
@@ -84,6 +100,16 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"150",
+			"200",
+			"speechHeight3",
+			"speechHeight2",
+			"speechHeight1",
+			"speechWidth3",
+			"speechWidth2",
+			"speechWidth1",
+			"Speech_Bubble_3_Width",
+			"speechTri",
 			"renderer",
 			"render",
 			"inline",
@@ -94,11 +120,20 @@
 			"dae"
 		],
 		"highlight": true,
-		"in_selection": true,
+		"in_selection": false,
 		"preserve_case": false,
 		"regex": false,
 		"replace_history":
 		[
+			"120",
+			"150",
+			"Speech_Bubble_3_Height",
+			"Speech_Bubble_2_Height",
+			"Speech_Bubble_1_Height",
+			"Speech_Bubble_3_Width",
+			"Speech_Bubble_2_Width",
+			"Speech_Bubble_1_Width",
+			"triPosition"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -109,8 +144,37 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "LogoAllControlP5.pde",
+					"settings":
+					{
+						"buffer_size": 14182,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								11610,
+								11610
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Processing/Syntax/Processing.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 11.0,
+						"translation.y": 3265.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -151,7 +215,7 @@
 	},
 	"replace":
 	{
-		"height": 0.0
+		"height": 64.0
 	},
 	"save_all_on_build": true,
 	"select_file":
