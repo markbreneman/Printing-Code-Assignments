@@ -34,15 +34,6 @@ class SpeechBubble
 
     canvas.rect(x, y, w, h, r);    
     
-//    println("CY= "+ CY);
-//    println("bottom= "+ Bottom);
-//    println("Top= "+ Top);
-//    println("mH= "+ mH);
-//    println("mW= "+ mW);
-//      println("CX= "+ CX);
-//      println("Break1= "+ mW*5/12+gridPMWidth/2);
-//      println("Break2= "+ mW*7/12+gridPMWidth/2);
-//      
       
      if (Top>mH/2+gridPMHeight/2) {
 

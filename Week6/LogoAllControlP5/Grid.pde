@@ -90,30 +90,6 @@ class ModularGrid
   }
   
   
-  
-//  Module getRandomModule()
-//  {
-//    // get all modules that are not used
-//    ArrayList<Module> notUsedModules = new ArrayList();
-//    
-//    for(int i = 0; i < cols; i++)
-//    {
-//      for(int j = 0; j < rows; j++)
-//      {
-//        if(!modules[i][j].used)
-//        {
-//          notUsedModules.add(modules[i][j]);
-//        }
-//      }
-//    }
-//    
-//    // select a random module, set used to true, and return it
-//    int ranIndex = floor(random(notUsedModules.size()));
-//    Module selected = notUsedModules.get(ranIndex);
-//    selected.used = true;
-//    return selected;
-//  }
-  
   void display()
   {
     canvas.noFill();
