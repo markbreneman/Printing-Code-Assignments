@@ -66,13 +66,11 @@ ModularGrid gridN1;
 ModularGrid gridN2;
 ModularGrid gridN3;
 
-SpeechBubble[] speechbubbles = new SpeechBubble[8]; //An array of 9 speech bubbles. 3 per grid.
+SpeechBubble[] speechbubbles = new SpeechBubble[9]; //An array of 9 speech bubbles. 3 per grid.
 
-int resx;
-int resy;
-int resw;
-int resh;
 boolean selected1;
+boolean selected2; 
+boolean selected3; 
 
 void setup() {
 
@@ -98,21 +96,6 @@ void setup() {
 
   initControls();  
   selected1 = false;
-  
-  for (int i = 0; i < 2; i ++ ) { // Initialize each SpeechBubbles in first nested grid
-//    speechbubbles[i] = new SpeechBubble(color(i*2),0,i*2,i/20.0); 
-  }
-  
-  for (int i = 3; i < 5; i ++ ) { // Initialize each SpeechBubbles in Second nested grid
-//    speechbubbles[i] = new SpeechBubble(color(i*2),0,i*2,i/20.0); 
-  }
-  
-  for (int i = 6; i < 8; i ++ ) { // Initialize each SpeechBubbles in Third nested grid
-//    speechbubbles[i] = new SpeechBubble(color(i*2),0,i*2,i/20.0); 
-  }
-}
-
-void draw() {
 
   canvas.beginDraw();
   canvas.colorMode(HSB, 360, 100, 100, 1);
@@ -123,47 +106,136 @@ void draw() {
   // create a grid object as a container for Logos 
   grid = new ModularGrid(gridCols, gridRows, gridGutter, gridPMWidth, gridPMHeight); // COLUMNS,ROWS GUTTTERSIZE, PAGEMARGIN WIDTH, PAGEMARGIN HEIGHT 
 
-  //Nested Grids
+  //Nested Grids:Note to have different sized grids in 2 or 3 change it to a gridN2 or gridN3 variable.
   gridN1 = new ModularGrid(gridN1Cols, gridN1Rows, gridN1Gutter, gridN1PMWidth, gridN1PMHeight, grid.modules[0][0]); // COLUMNS,ROWS GUTTTERSIZE, PAGEMARGIN WIDTH, PAGEMARGIN HEIGHT, CONTAINER MODULE
   gridN2 = new ModularGrid(gridN1Cols, gridN1Rows, gridN1Gutter, gridN1PMWidth, gridN1PMHeight, grid.modules[1][0]); // COLUMNS,ROWS GUTTTERSIZE, PAGEMARGIN WIDTH, PAGEMARGIN HEIGHT, CONTAINER MODULE
   gridN3 = new ModularGrid(gridN1Cols, gridN1Rows, gridN1Gutter, gridN1PMWidth, gridN1PMHeight, grid.modules[2][0]); // COLUMNS,ROWS GUTTTERSIZE, PAGEMARGIN WIDTH, PAGEMARGIN HEIGHT, CONTAINER MODULE
-  
-  canvas.noStroke();
 
   canvas.fill(196.45, 100, 93.81, 1);
-  //  SpeechBubble res1 = new SpeechBubble(gridN1.modules[int(speechBubble1.arrayValue()[0])][0].x, gridN1.modules[0][int(speechBubble1.arrayValue()[1])].y, gridN1.modules[0][0].w*speechWidth1, gridN1.modules[0][0].h*speechHeight1, 80.0, grid.modules[0][0]);
- 
-  res1 = new SpeechBubble(resx, resy, resw, resh, 80.0, grid.modules[0][0]);
+  for (int i = 0; i <= 2; i ++ ) { // Initialize each SpeechBubbles in first nested grid
+    speechbubbles[i] = new SpeechBubble(gridN1.modules[int(random(0, gridN1Cols))][0].x, gridN1.modules[0][int(random(0, gridN1Rows))].y, gridN1.modules[0][0].w*(int(random(3, 4))), gridN1.modules[0][0].h*(int(random(3, 4))), 80.0, grid.modules[0][0]);
+  }
+
+  for (int i = 3; i <= 5; i ++ ) { // Initialize each SpeechBubbles in Second nested grid
+    speechbubbles[i] = new SpeechBubble(gridN2.modules[int(random(0, gridN1Cols))][0].x, gridN2.modules[0][int(random(0, gridN1Rows))].y, gridN2.modules[0][0].w*(int(random(3, 4))), gridN2.modules[0][0].h*(int(random(3, 4))), 80.0, grid.modules[1][0]);
+  }
+
+  for (int i = 6; i <= 8; i ++ ) { // Initialize each SpeechBubbles in Third nested grid
+    speechbubbles[i] = new SpeechBubble(gridN3.modules[int(random(0, gridN1Cols))][0].x, gridN3.modules[0][int(random(0, gridN1Rows))].y, gridN3.modules[0][0].w*(int(random(3, 4))), gridN3.modules[0][0].h*(int(random(3, 4))), 80.0, grid.modules[2][0]);
+  }
+}
+
+void draw() {
+  canvas.background(0, 0, 100, .5);
+
+  canvas.noStroke();
+
   if (selectedCanvas.equals("Canvas 1") == true) {
     selected1 = true;
+    selected2 = false;
+    selected3 = false;
   }
 
   if (selected1 == true) {   
-    resx=int(gridN1.modules[int(speechBubble1.arrayValue()[0])][0].x);
-    resy=int(gridN1.modules[0][int(speechBubble1.arrayValue()[1])].y);
-    resw=int(gridN1.modules[0][0].w*speechWidth1); 
-    resh=int(gridN1.modules[0][0].h*speechHeight1);
+    speechbubbles[0].x=int(gridN1.modules[int(speechBubble1.arrayValue()[0])][0].x);
+    speechbubbles[0].y=int(gridN1.modules[0][int(speechBubble1.arrayValue()[1])].y);
+    speechbubbles[0].w=int(gridN1.modules[0][0].w*speechWidth1); 
+    speechbubbles[0].h=int(gridN1.modules[0][0].h*speechHeight1);
+
+    speechbubbles[1].x=int(gridN1.modules[int(speechBubble2.arrayValue()[0])][0].x);
+    speechbubbles[1].y=int(gridN1.modules[0][int(speechBubble2.arrayValue()[1])].y);
+    speechbubbles[1].w=int(gridN1.modules[0][0].w*speechWidth2); 
+    speechbubbles[1].h=int(gridN1.modules[0][0].h*speechHeight2);
+
+    speechbubbles[2].x=int(gridN1.modules[int(speechBubble3.arrayValue()[0])][0].x);
+    speechbubbles[2].y=int(gridN1.modules[0][int(speechBubble3.arrayValue()[1])].y);
+    speechbubbles[2].w=int(gridN1.modules[0][0].w*speechWidth3); 
+    speechbubbles[2].h=int(gridN1.modules[0][0].h*speechHeight3);
+  }
+
+  if  (selectedCanvas.equals("Canvas 2") == true) {
+    selected1 = false;
+    selected2 = true;
+    selected3 = false;
+  }
+
+  if (selected2 == true) {   
+    speechbubbles[3].x=int(gridN2.modules[int(speechBubble1.arrayValue()[0])][0].x);
+    speechbubbles[3].y=int(gridN2.modules[0][int(speechBubble1.arrayValue()[1])].y);
+    speechbubbles[3].w=int(gridN2.modules[0][0].w*speechWidth1); 
+    speechbubbles[3].h=int(gridN2.modules[0][0].h*speechHeight1);
+
+    speechbubbles[4].x=int(gridN2.modules[int(speechBubble2.arrayValue()[0])][0].x);
+    speechbubbles[4].y=int(gridN2.modules[0][int(speechBubble2.arrayValue()[1])].y);
+    speechbubbles[4].w=int(gridN2.modules[0][0].w*speechWidth2); 
+    speechbubbles[4].h=int(gridN2.modules[0][0].h*speechHeight2);
+
+    speechbubbles[5].x=int(gridN2.modules[int(speechBubble3.arrayValue()[0])][0].x);
+    speechbubbles[5].y=int(gridN2.modules[0][int(speechBubble3.arrayValue()[1])].y);
+    speechbubbles[5].w=int(gridN2.modules[0][0].w*speechWidth3); 
+    speechbubbles[5].h=int(gridN2.modules[0][0].h*speechHeight3);
   }  
 
-  if (selectedCanvas.equals("Canvas 2") == true) {
+
+   if  (selectedCanvas.equals("Canvas 3") == true) {
     selected1 = false;
+    selected2 = false;
+    selected3 = true;
   }
- 
- 
-  canvas.fill(196.45, 100, 93.81, .5);
-  new SpeechBubble(gridN1.modules[int(speechBubble2.arrayValue()[0])][0].x, gridN1.modules[0][int(speechBubble2.arrayValue()[1])].y, gridN1.modules[0][0].w*speechWidth2, gridN1.modules[0][0].h*speechHeight2, 80.0, grid.modules[0][0]);
 
-  canvas.fill(196.45, 100, 93.81, .25);
-  new SpeechBubble(gridN1.modules[int(speechBubble3.arrayValue()[0])][0].x, gridN1.modules[0][int(speechBubble3.arrayValue()[1])].y, gridN1.modules[0][0].w*speechWidth3, gridN1.modules[0][0].h*speechHeight3, 80.0, grid.modules[0][0]);
+  if (selected3 == true) {   
+    speechbubbles[6].x=int(gridN3.modules[int(speechBubble1.arrayValue()[0])][0].x);
+    speechbubbles[6].y=int(gridN3.modules[0][int(speechBubble1.arrayValue()[1])].y);
+    speechbubbles[6].w=int(gridN3.modules[0][0].w*speechWidth1); 
+    speechbubbles[6].h=int(gridN3.modules[0][0].h*speechHeight1);
 
+    speechbubbles[7].x=int(gridN3.modules[int(speechBubble2.arrayValue()[0])][0].x);
+    speechbubbles[7].y=int(gridN3.modules[0][int(speechBubble2.arrayValue()[1])].y);
+    speechbubbles[7].w=int(gridN3.modules[0][0].w*speechWidth2); 
+    speechbubbles[7].h=int(gridN3.modules[0][0].h*speechHeight2);
 
-
+    speechbubbles[8].x=int(gridN3.modules[int(speechBubble3.arrayValue()[0])][0].x);
+    speechbubbles[8].y=int(gridN3.modules[0][int(speechBubble3.arrayValue()[1])].y);
+    speechbubbles[8].w=int(gridN3.modules[0][0].w*speechWidth3); 
+    speechbubbles[8].h=int(gridN3.modules[0][0].h*speechHeight3);
+  }  
+  
+  for (int i=0; i<=8; i++) {
+    if (i==0) {  
+      canvas.fill(196.45, 100, 93.81, 1);
+    }
+    if (i==1) {  
+      canvas.fill(196.45, 100, 93.81, .5);
+    }
+    if (i==2) {  
+      canvas.fill(196.45, 100, 93.81, .25);
+    }
+    if (i==3) {  
+      canvas.fill(87.99, 65, 73.01, 1);
+    }
+    if (i==4) {  
+      canvas.fill(87.99, 65, 73.01, .5);
+    }
+    if (i==5) {  
+      canvas.fill(87.99, 65, 73.01, .25);
+    }if (i==6) {  
+      canvas.fill(215.23, 3.32, 52.03, 1); 
+    }
+    if (i==7) {  
+      canvas.fill(215.23, 3.32, 52.03, .5); 
+    }
+    if (i==8) {  
+      canvas.fill(215.23, 3.32, 52.03, .25); 
+    }
+    speechbubbles[i].display(speechbubbles[i].x, speechbubbles[i].y, speechbubbles[i].w, speechbubbles[i].h);
+  }
 
   canvas.fill(0, 0, 100, 1);
   canvas.textAlign(CENTER);
   canvas.textFont(font, 650);
   canvas.text("skype", grid.modules[0][0].w/2+gridPMWidth, grid.modules[0][0].h/2+gridPMHeight);
-
+  canvas.text("skype", 3*grid.modules[1][0].w/2+gridPMWidth+gridGutter, grid.modules[1][0].h/2+gridPMHeight);
+  canvas.text("skype", 5*grid.modules[2][0].w/2+gridPMWidth+gridGutter*2, grid.modules[2][0].h/2+gridPMHeight);
 
   //Show the Compartmentalized logo space
   grid.display();
@@ -171,8 +243,8 @@ void draw() {
   if (gridShow==true)
   {
     gridN1.display();
-    //    gridN2.display();
-    //    gridN3.display();
+    gridN2.display();
+    gridN3.display();
   }
 
   if (gridShow==false && showing.equals("Not Showing"))

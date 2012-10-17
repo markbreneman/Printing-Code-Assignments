@@ -11,6 +11,8 @@ class SpeechBubble
   float Bottom;
   float mW;//Containing Module Width
   float mH;//Containing Module Height
+  float offsetW; 
+  float offsetH;
   //  boolean used = false;
 
   //  Speech() {}
@@ -21,21 +23,27 @@ class SpeechBubble
     y = _y;
     w = _w;
     h = _h;
-    r = _r;
+    r=_r;
     mW = _module.w;
     mH = _module.h;
-    float offsetW = w*.125;
-    float offsetH = h*.35;
+    
+  }
+
+  void display(float _x, float _y, float _w, float _h) {
+  
+
+    offsetW = w*.125;
+    offsetH = h*.35;
 
     CX=x+w/2;
     CY=y+h/2;
     Top=y;
     Bottom=y+h;
-
-    canvas.rect(x, y, w, h, r);    
     
-      
-     if (Top>mH/2+gridPMHeight/2) {
+    
+    canvas.rect(x, y, w, h, r);    
+
+    if (Top>mH/2+gridPMHeight/2) {
 
       //TOP TRIANGLES
       //LEFT
@@ -43,7 +51,7 @@ class SpeechBubble
         canvas.triangle(
         x+offsetW, Top, 
         x+offsetW*3, Top, 
-        x+offsetW+(random(-75,0)), Top-offsetH*2
+        x+offsetW+(random(-75, 0)), Top-offsetH*2
           );
       }
 
@@ -61,42 +69,42 @@ class SpeechBubble
         canvas.triangle(
         x+w-offsetW*3, Top, 
         x+w-offsetW, Top, 
-        x+w-offsetW-(random(-75,0)), Top-offsetH*2
+        x+w-offsetW-(random(-75, 0)), Top-offsetH*2
           );
       }
     }
 
     else if (Top<mH/2+gridPMHeight/2) {
       //BOTTOM TRIANGLES
-     //LEFT
+      //LEFT
       if (CX<mW*5/12+gridPMWidth/2) {
-      canvas.triangle(
-      x+offsetW, Bottom, 
-      x+offsetW*3, Bottom, 
-      x+offsetW+(random(-75,0)), Bottom+offsetH*2
-        );
+        canvas.triangle(
+        x+offsetW, Bottom, 
+        x+offsetW*3, Bottom, 
+        x+offsetW+(random(-75, 0)), Bottom+offsetH*2
+          );
       }
-      
+
       //CENTER
       if (CX>mW*5/12+gridPMWidth/2 && CX<mW*9/12+gridPMWidth/2) {
-      canvas.triangle(
-      CX-offsetW, Bottom, 
-      CX+offsetW, Bottom, 
-      CX, Bottom+offsetH*2
-        );
+        canvas.triangle(
+        CX-offsetW, Bottom, 
+        CX+offsetW, Bottom, 
+        CX, Bottom+offsetH*2
+          );
       }
-      
+
       //RIGHT
       if (CX>mW*9/12+gridPMWidth/2) {
-      canvas.triangle(
-      x+w-offsetW*3, Bottom, 
-      x+w-offsetW, Bottom, 
-      x+w-offsetW-(random(-75,0)), Bottom+offsetH*2
-        );
+        canvas.triangle(
+        x+w-offsetW*3, Bottom, 
+        x+w-offsetW, Bottom, 
+        x+w-offsetW-(random(-75, 0)), Bottom+offsetH*2
+          );
       }
     }
-    
-    
   }
+
+
 }
 
