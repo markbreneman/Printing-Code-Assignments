@@ -16,7 +16,7 @@
 	"buffers":
 	[
 	],
-	"build_system": "",
+	"build_system": "Packages/Processing/Processing.sublime-build",
 	"command_palette":
 	{
 		"height": 267.0,
@@ -44,6 +44,7 @@
 	},
 	"file_history":
 	[
+		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Printing Code/05 Outgoing Information/Week6/LogoAllControlP5/LogoAllControlP5.pde",
 		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/01 Incoming Information/boilerplate/index.html",
 		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/static/scripts/application.js",
 		"/Users/markbreneman/Documents/ITP/Classes/Fall 2012/Visualizing JS/05 Outgoing Information/101412 ThreeJS-GlobePoints/static/scripts/THREEx.screenshot.js",
@@ -144,6 +145,10 @@
 		]
 	},
 	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 100.0
+	},
 	"replace":
 	{
 		"height": 0.0
