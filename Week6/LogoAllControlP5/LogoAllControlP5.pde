@@ -33,28 +33,41 @@ String showing="Not Showing";
 
 //CONTROL P5 Addition
 import controlP5.*;
-DropdownList p1;
+
 ControlP5 controlP5;
 ControlWindow controlWindow;
+//DropDown list for Canvas Selection
+DropdownList canvasSelector;
+String selectedCanvas;
+
+//Positional 2D Slider
 Slider2D speechBubble1;
 Slider2D speechBubble2;
 Slider2D speechBubble3;
+//Height and Width Sliders
 Slider S1;
 Slider S2;
 Slider S3;
 Slider S4;
 Slider S5;
 Slider S6;
+
 int speechHeight1;
 int speechWidth1;
 int speechHeight2;
 int speechWidth2;
 int speechHeight3;
 int speechWidth3;
+
 SpeechBubble res1;
+
 ModularGrid grid;
 ModularGrid gridN1;
-String selectedCanvas;
+ModularGrid gridN2;
+ModularGrid gridN3;
+
+SpeechBubble[] speechbubbles = new SpeechBubble[8]; //An array of 9 speech bubbles. 3 per grid.
+
 int resx;
 int resy;
 int resw;
@@ -85,6 +98,18 @@ void setup() {
 
   initControls();  
   selected1 = false;
+  
+  for (int i = 0; i < 2; i ++ ) { // Initialize each SpeechBubbles in first nested grid
+//    speechbubbles[i] = new SpeechBubble(color(i*2),0,i*2,i/20.0); 
+  }
+  
+  for (int i = 3; i < 5; i ++ ) { // Initialize each SpeechBubbles in Second nested grid
+//    speechbubbles[i] = new SpeechBubble(color(i*2),0,i*2,i/20.0); 
+  }
+  
+  for (int i = 6; i < 8; i ++ ) { // Initialize each SpeechBubbles in Third nested grid
+//    speechbubbles[i] = new SpeechBubble(color(i*2),0,i*2,i/20.0); 
+  }
 }
 
 void draw() {
@@ -100,12 +125,14 @@ void draw() {
 
   //Nested Grids
   gridN1 = new ModularGrid(gridN1Cols, gridN1Rows, gridN1Gutter, gridN1PMWidth, gridN1PMHeight, grid.modules[0][0]); // COLUMNS,ROWS GUTTTERSIZE, PAGEMARGIN WIDTH, PAGEMARGIN HEIGHT, CONTAINER MODULE
-
+  gridN2 = new ModularGrid(gridN1Cols, gridN1Rows, gridN1Gutter, gridN1PMWidth, gridN1PMHeight, grid.modules[1][0]); // COLUMNS,ROWS GUTTTERSIZE, PAGEMARGIN WIDTH, PAGEMARGIN HEIGHT, CONTAINER MODULE
+  gridN3 = new ModularGrid(gridN1Cols, gridN1Rows, gridN1Gutter, gridN1PMWidth, gridN1PMHeight, grid.modules[2][0]); // COLUMNS,ROWS GUTTTERSIZE, PAGEMARGIN WIDTH, PAGEMARGIN HEIGHT, CONTAINER MODULE
+  
   canvas.noStroke();
 
   canvas.fill(196.45, 100, 93.81, 1);
   //  SpeechBubble res1 = new SpeechBubble(gridN1.modules[int(speechBubble1.arrayValue()[0])][0].x, gridN1.modules[0][int(speechBubble1.arrayValue()[1])].y, gridN1.modules[0][0].w*speechWidth1, gridN1.modules[0][0].h*speechHeight1, 80.0, grid.modules[0][0]);
-
+ 
   res1 = new SpeechBubble(resx, resy, resw, resh, 80.0, grid.modules[0][0]);
   if (selectedCanvas.equals("Canvas 1") == true) {
     selected1 = true;
@@ -207,17 +234,17 @@ void mousePressed() {
 
 void initControls() {
 
-  p1 = controlP5.addDropdownList("canvasSelect", 10, 500, 380, 120);
-  p1.setBackgroundColor(color(190));
-  p1.setItemHeight(15);
-  p1.setBarHeight(15);
+  canvasSelector = controlP5.addDropdownList("canvasSelect", 10, 500, 380, 120);
+  canvasSelector.setBackgroundColor(color(190));
+  canvasSelector.setItemHeight(15);
+  canvasSelector.setBarHeight(15);
   //  textAlign(CENTER);///later...
-  p1.captionLabel().set("Canvas");
-  p1.addItem("Canvas 1", 1);
-  p1.addItem("Canvas 2", 2);
-  p1.addItem("Canvas 3", 3);
-  p1.moveTo(controlWindow);
-  //  println(p1);
+  canvasSelector.captionLabel().set("Canvas");
+  canvasSelector.addItem("Canvas 1", 1);
+  canvasSelector.addItem("Canvas 2", 2);
+  canvasSelector.addItem("Canvas 3", 3);
+  canvasSelector.moveTo(controlWindow);
+  //  println(canvasSelector);
 
 
   //CONTROL SET1
@@ -279,9 +306,6 @@ void initControls() {
 void controlEvent(ControlEvent theEvent) {
   if (theEvent.isGroup()) {
     // check if the Event was triggered from a ControlGroup
-    //    println(theEvent.group().value()+" from "+theEvent.group());
-
-
     if (theEvent.group().name() == "canvasSelect") {
       selectedCanvas = "Canvas "+String.valueOf(int(theEvent.group().value()));
     }
