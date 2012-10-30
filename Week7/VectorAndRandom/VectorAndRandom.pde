@@ -5,6 +5,7 @@ PGraphics canvas;
 //PFont font;
 RFont font;
 
+
 //Dimensions of Plotter Paper in Inches
 float paper_width = 17;
 float paper_height = 22;
@@ -34,6 +35,7 @@ int gridN1PMHeight=0;
 
 ModularGrid gridN2;
 Monitor monitor;
+Key Key;
 
 Boolean gridShow=false;
 String showing="Not Showing";
@@ -48,24 +50,27 @@ void setup() {
   colorMode(HSB, 360, 100, 100, 1);
   //  frameRate(5);
   background(0, 0, 69, 1);
-  
+
   RG.init(this);
-  font = new RFont( "Gotham-Bold.ttf", 300, RFont.CENTER);
-  
+  font = new RFont( "Gotham-Bold.ttf", 55, RFont.CENTER);
+
+
   canvas = createGraphics(canvas_width, canvas_height);
   calculateResizeRatio();
 
-  
+
   canvas.beginDraw();
   canvas.colorMode(HSB, 360, 100, 100, 1);
   canvas.background(0, 0, 100, .5);
   canvas.smooth();
-//  canvas.translate(canvas.width/2,canvas.height/2);
-//  canvas.fill(0,0,100);
-//  canvas.stroke(0,0,0);
-//  canvas.strokeWeight(10);
-//  font.draw("Test",canvas);
-//  
+
+  //  canvas.translate(canvas.width/2,canvas.height/2);
+  //  canvas.fill(0,0,100);
+  //  canvas.stroke(0,0,0);
+  //  canvas.strokeWeight(10);
+  //  font.draw("Test",canvas);
+  //  
+
   //Grid - Main grid
   // COLUMNS,ROWS GUTTTERSIZE, PAGEMARGIN WIDTH, PAGEMARGIN HEIGHT  
   grid = new ModularGrid(gridCols, gridRows, gridGutter, gridPMWidth, gridPMHeight);  
@@ -73,71 +78,102 @@ void setup() {
   //Nested Grid - Grid for overall artwork
   // COLUMNS,ROWS GUTTTERSIZE, PAGEMARGIN WIDTH, PAGEMARGIN HEIGHT, CONTAINER MODULE
   gridN1 = new ModularGrid(gridN1Cols, gridN1Rows, gridN1Gutter, gridN1PMWidth, gridN1PMHeight, grid.modules[0][0]); 
-  
+
   //Monitor Grid for Letter Placement
   // COLUMNS,ROWS GUTTTERSIZE, PAGEMARGIN WIDTH, PAGEMARGIN HEIGHT, STARTX, STARTY, WIDTH, HEIGHT 
   gridN2 = new ModularGrid(
-  20,
-  20,
-  0,
-  0,
-  0,
+  20, 
+  20, 
+  0, 
+  0, 
+  0, 
   gridN1.modules[10][0].x+gridN1.modules[10][0].w/2, 
-  gridN1.modules[10][1].h+gridPMHeight,
-  gridN1.modules[10][0].w*8.5,
+  gridN1.modules[10][1].h+gridPMHeight, 
+  gridN1.modules[10][0].w*8.5, 
   gridN1.modules[10][0].h*5);
 
   canvas.noStroke();
   //Display the Print Area
   grid.display();  
-  
+
   //Draw the Monitor
   monitor=new Monitor();
- 
- //Row1
-  canvas.strokeWeight(canvas.width/300);
-  for(int i=0; i<11;i++){
-  canvas.rect(
-  gridN1.modules[1][0].x+i*(gridN1.modules[1][0].x/2-30),
-  gridN1.modules[1][17].y,
-  gridN1.modules[1][0].w/2,
-  gridN1.modules[1][0].w/2,
-  20,20,20,20
- ); 
-  }
+
+  //Row1
+  canvas.strokeWeight(canvas.width/400);
+  println("The thick Stroke is " + canvas.width/400);
+
+  int j = 49;  
   
-  for(int i=0; i<12;i++){
-  canvas.rect(
-  gridN1.modules[1][0].x+i*(gridN1.modules[1][0].x/2-30)+gridN1.modules[1][0].x/2,
-  gridN1.modules[1][17].y+gridN1.modules[1][0].w/2+30,
-  gridN1.modules[1][0].w/2,
-  gridN1.modules[1][0].w/2,
-  20,20,20,20
- ); 
-  }
+  String[] row1={"1","2","3","4","5","6","7","8","9","0","+","delete"};
+  String[] row2={"tab","Q","W","E","R","T","Y","U","I","O","P","[","["};
+  String[] row3={"caps lock","A","S","D","F","G","H","J","K","L",";","'","return"};
+  String[] row4={"shift","Z","X","C","V","B","N","M","\,",".","?","shift"};
   
-  for(int i=0; i<11;i++){
-  canvas.rect(
-  gridN1.modules[1][0].x+i*(gridN1.modules[1][0].x/2-30)+gridN1.modules[1][0].x/1.5,
-  gridN1.modules[1][17].y+gridN1.modules[1][0].w+60,
-  gridN1.modules[1][0].w/2,
-  gridN1.modules[1][0].w/2,
-  20,20,20,20
- ); 
-  }
-  
-  for(int i=0; i<10;i++){
-  canvas.rect(
-  gridN1.modules[1][0].x+i*(gridN1.modules[1][0].x/2-30)+gridN1.modules[1][0].x/1.25,
-  gridN1.modules[1][17].y+gridN1.modules[1][0].w*1.85,
-  gridN1.modules[1][0].w/2,
-  gridN1.modules[1][0].w/2,
-  20,20,20,20
- ); 
-  }
+
+  for (int i=0; i<=10;i++) {
+    String letter= Character.toString(char(j));
+
+    if (i==9) {
+      new Key(
+      gridN1.modules[1][0].x+i*(gridN1.modules[1][0].x/2-30), 
+      gridN1.modules[1][17].y, 
+      gridN1.modules[1][0].w/2, 
+      gridN1.modules[1][0].w/2, 
+      "0"
+        );
+    }
+
+    if (i==10) {
+      new Key(
+      gridN1.modules[1][0].x+i*(gridN1.modules[1][0].x/2-30), 
+      gridN1.modules[1][17].y, 
+      gridN1.modules[1][0].w/2, 
+      gridN1.modules[1][0].w/2, 
+      "+"
+        );
+    }
+    else if(i<=8){
+    new Key(
+    gridN1.modules[1][0].x+i*(gridN1.modules[1][0].x/2-30), 
+    gridN1.modules[1][17].y, 
+    gridN1.modules[1][0].w/2, 
+    gridN1.modules[1][0].w/2, 
+    letter
+      );
+    j++;
+  }}
 
 
-  
+  for (int i=0; i<12;i++) {
+    new Key(
+    gridN1.modules[1][0].x+i*(gridN1.modules[1][0].x/2-30)+gridN1.modules[1][0].x/2, 
+    gridN1.modules[1][17].y+gridN1.modules[1][0].w/2+30, 
+    gridN1.modules[1][0].w/2, 
+    gridN1.modules[1][0].w/2, 
+    "w"
+      );
+  }
+
+  for (int i=0; i<11;i++) {
+    canvas.rect(
+    gridN1.modules[1][0].x+i*(gridN1.modules[1][0].x/2-30)+gridN1.modules[1][0].x/1.5, 
+    gridN1.modules[1][17].y+gridN1.modules[1][0].w+60, 
+    gridN1.modules[1][0].w/2, 
+    gridN1.modules[1][0].w/2, 
+    20, 20, 20, 20
+      );
+  }
+
+  for (int i=0; i<10;i++) {
+    canvas.rect(
+    gridN1.modules[1][0].x+i*(gridN1.modules[1][0].x/2-30)+gridN1.modules[1][0].x/1.25, 
+    gridN1.modules[1][17].y+gridN1.modules[1][0].w*1.85, 
+    gridN1.modules[1][0].w/2, 
+    gridN1.modules[1][0].w/2, 
+    20, 20, 20, 20
+      );
+  }
 }
 
 void draw() {
@@ -204,5 +240,4 @@ void keyPressed()
 
 void mousePressed() {
 }
-
 
