@@ -78,9 +78,11 @@ void setup() {
   canvas.noStroke();
   //Display the Print Area
   grid.display();  
+  
   //Draw the Monitor
   monitor=new Monitor();
-  
+ 
+ //Row1
   canvas.strokeWeight(canvas.width/300);
   for(int i=0; i<11;i++){
   canvas.rect(
