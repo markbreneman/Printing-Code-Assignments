@@ -1,5 +1,9 @@
+import toxi.geom.*;
+import geomerative.*;
+
 PGraphics canvas;
-PFont font;
+//PFont font;
+RFont font;
 
 //Dimensions of Plotter Paper in Inches
 float paper_width = 17;
@@ -40,20 +44,28 @@ void setup() {
   //I set a width and the height corresponds
   int width = 600;//Change this number to get a display window with papers aspect ratio
   int height = int(width*paper_ratio);
-  
-
   size(width, height);
   colorMode(HSB, 360, 100, 100, 1);
   //  frameRate(5);
   background(0, 0, 69, 1);
+  
+  RG.init(this);
+  font = new RFont( "Gotham-Bold.ttf", 300, RFont.CENTER);
+  
   canvas = createGraphics(canvas_width, canvas_height);
   calculateResizeRatio();
 
+  
   canvas.beginDraw();
   canvas.colorMode(HSB, 360, 100, 100, 1);
   canvas.background(0, 0, 100, .5);
   canvas.smooth();
-
+//  canvas.translate(canvas.width/2,canvas.height/2);
+//  canvas.fill(0,0,100);
+//  canvas.stroke(0,0,0);
+//  canvas.strokeWeight(10);
+//  font.draw("Test",canvas);
+//  
   //Grid - Main grid
   // COLUMNS,ROWS GUTTTERSIZE, PAGEMARGIN WIDTH, PAGEMARGIN HEIGHT  
   grid = new ModularGrid(gridCols, gridRows, gridGutter, gridPMWidth, gridPMHeight);  
