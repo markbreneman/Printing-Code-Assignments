@@ -5,8 +5,8 @@ class Monitor{
    
   //Monitor
   canvas.strokeWeight(canvas.width/200);
-  int monRadius=40;
-  int screenRadius=50;
+  int monRadius=70;
+  int screenRadius=100;
   //Outer
   canvas.fill(208,2,51);
   canvas.rect(
