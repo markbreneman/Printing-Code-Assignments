@@ -3,8 +3,9 @@ import geomerative.*;
 
 PGraphics canvas;
 //PFont font;
-RFont font;
-
+RFont GothamBold;
+RFont Tungsten;
+RFont TungstenBold;
 
 //Dimensions of Plotter Paper in Inches
 float paper_width = 17;
@@ -34,17 +35,49 @@ int gridN1PMWidth=0;
 int gridN1PMHeight=0;
 
 ModularGrid gridN2;
-Monitor monitor;
-Keyboard keyboard;
-ArrayList keysArray;
-Key Key;
-//Key A;
+
 color c1;  
 color c2;  
 color c3;  
 color c4;
 color c5;
 color c6;
+color c7;
+color c8;
+color c9;
+color c10;
+color c11;
+
+//Array Colors;
+color[] Colors;
+
+Monitor monitor;
+Keyboard keyboard;
+ArrayList keysArray;
+Key Key;
+
+//This drives how many; letters are displayed, keys are selected, and lines are drawn
+int numbersOfLetters=5;
+////////////////////////////////////////////
+
+ArrayList lettersArray;
+Letter Letter;
+
+ArrayList<Key> usableKeys;
+ArrayList<Key> selectedKeys;
+
+ArrayList<Vec2D> selectedKeyPoints;
+ArrayList<Vec2D> letterPoints;
+ArrayList<Vec2D> random1Points;
+ArrayList<Vec2D> random2Points;
+
+ArrayList<Vec2D> points;
+ArrayList pointsList;
+
+
+Connector connector;
+ArrayList<Connector> connectorList;
+
 
 Boolean gridShow=false;
 String showing="Not Showing";
@@ -58,24 +91,45 @@ void setup() {
   size(width, height);
   colorMode(HSB, 360, 100, 100, 1);
   background(0, 0, 69, 1);
-  //DEFINE FONT
+
+  //DEFINE FONTS
   RG.init(this);
-  font = new RFont( "Gotham-Bold.ttf", 55, RFont.CENTER);
+  GothamBold = new RFont( "Gotham-Bold.ttf", 55, RFont.CENTER);
+  TungstenBold = new RFont( "Tungsten-Bold.ttf", 300, RFont.CENTER);
+
   //DEFINE COLORS **AFTER SWITCHING TO HSB MODE**
   c1 = color(352.09, 86, 92.52);  
   c2 = color(62.85, 19.95, 95.41);  
   c3 = color(97.62, 18.55, 73.42);  
   c4 = color(152.57, 11.25, 75.99);
   c5 = color(96.04, 17.83, 47.92);
-  c6 = color(0,0,3);
-
+  c6 = color(0, 0, 3); // PrintingBlack
+  //COLORs WITH TRANSPARENCY
+  c7 = color(352.09, 86, 92.52, .5);  
+  c8 = color(62.85, 19.95, 95.41, .5);  
+  c9 = color(97.62, 18.55, 73.42, .5);  
+  c10 = color(152.57, 11.25, 75.99, .5);
+  c11 = color(96.04, 17.83, 47.92, .5);
+  
+//  Colors=new ArrayList();
+//  Colors.add(c1);
+//  C   olors.add(c2);
+//  Colors.add(c3);
+//  Colors.add(c4);
+//  Colors.add(c5);
+//  Colors.add(c6);
+//  Colors.add(c7);
+//  Colors.add(c9);
+//  Colors.add(c10);
+//  Colors.add(c11);
+  
   canvas = createGraphics(canvas_width, canvas_height);
   calculateResizeRatio();
 
   canvas.beginDraw();
   canvas.colorMode(HSB, 360, 100, 100, 1);
   canvas.background(0, 0, 100, .5);
-  canvas.smooth();
+  //  canvas.smooth();
 
   //Grid - Main grid
   // COLUMNS,ROWS GUTTTERSIZE, PAGEMARGIN WIDTH, PAGEMARGIN HEIGHT  
@@ -100,28 +154,117 @@ void setup() {
 
   canvas.noStroke();
   //Display the Print Area
-  grid.display();  
-  //Draw the Monitor
+
+  //Create the Monitor and Keyboard Objects
   monitor=new Monitor();
   keyboard=new Keyboard();
-//  A = new Key(1000,1000,1000,1000,"j");
+
+  //Create the Letter Objects on the Display
+  letterPoints=new ArrayList();
+  Letter=new Letter();
+  Letter.create();
+
+  //Perform Weighted Average Selection of Keys
+  selectedKeys= new ArrayList();  
+  selectedKeyPoints= new ArrayList();   
+  
+  float totalPercentage=0;
+  for (int i=0; i<keysArray.size(); i++) {       
+    Key k= (Key) keysArray.get(i);
+    totalPercentage+=k.percentage;
+  }
+  final float constTotal=totalPercentage;
+  int chosenIndex = 0;
+  for (int j=0; j<numbersOfLetters; j++) {
+    totalPercentage = 0;
+    float result = random(constTotal);
+    for (int i = 0; i < keysArray.size(); i++)
+    {
+      Key k= (Key) keysArray.get(i);
+      if (k.selected==true && k.used==false) {
+        totalPercentage += k.percentage;
+
+        if (totalPercentage > result)
+        {
+          chosenIndex = i;
+          Key S= (Key) keysArray.get(chosenIndex);
+          S.used=true;
+          S.selected=true;
+          selectedKeys.add(S);
+          selectedKeyPoints.add(S.Center);
+          //println(S.c);
+          break;
+        }//END IF STATEMENT LOGIC & CALC
+      }//END IF STATEMENT CHECK FOR SELECTED-Should be considered & USED-Not already picked
+    }//END FOR LOOP OVER KEYS ARRAY
+  }//END SELECT FIVE FOR LOOP
+
+ //Create a arrays of "random points" based off of selected Points and letters
+  random1Points = new ArrayList();
+  random2Points = new ArrayList();
+ 
+  for (int i=0; i<numbersOfLetters; i++) {
+    Vec2D chosenKey = selectedKeyPoints.get(i);
+    float randKeyX =random(chosenKey.x+(gridN1.modules[10][0].w/2), chosenKey.x+gridN1.modules[10][0].w*5);
+    float randKeyY =random(chosenKey.y-(gridN1.modules[10][0].h)*10, chosenKey.y-gridN1.modules[10][0].h*22);
+    Vec2D randKey = new Vec2D(randKeyX, randKeyY);
+    random1Points.add(randKey);
+
+    Vec2D chosenLetter = letterPoints.get(i);
+    float randletterX =random(chosenLetter.x-(gridN1.modules[10][0].w), chosenLetter.x-gridN1.modules[10][0].w*8);
+    float randletterY =random(chosenLetter.y+(gridN1.modules[10][0].h)*8, chosenLetter.y+gridN1.modules[10][0].h*10);
+    Vec2D randLetter = new Vec2D(randletterX, randletterY);
+    random2Points.add(randLetter);
+  }
+ 
+   //  println("selected Key points = " + selectedKeyPoints);
+  //  println("random1Points = " + random1Points);
+  //  println("random2Points = " + random2Points); 
+  //  println("selected Letter points = " + letterPoints);
+ 
+  
+  pointsList = new ArrayList();
+  
+  connectorList = new ArrayList();
+  
+  //Create a Connectors
+  for (int i=0; i<numbersOfLetters; i++) {
+  connectorList.add(new Connector(i));  
+  }
 }
 
 void draw() {
   canvas.background(0, 0, 100);
+  canvas.fill(240, 0, 94);
+  canvas.strokeWeight(5);
+  canvas.stroke(0, 0, 0);
+  grid.display();  
+  //Draw Monitor and Keyboard
   monitor.display();
   keyboard.display();
-//  A.display();
-//  println(hex(A.c1));
-//  
+
+  //Draw Letters on Monitor 
+  for (int i=0; i<lettersArray.size(); i++) {
+    Letter L= (Letter) lettersArray.get(i);
+    String character = selectedKeys.get(i).c;
+    L.c=character;
+    L.display();
+  }
+
+  for (int i=0; i<connectorList.size(); i++) {
+     ArrayList pointListSelect=(ArrayList) pointsList.get(i);
+     Connector C= (Connector) connectorList.get(i);
+     C.display(pointListSelect);
+  }
+ 
+
   if (gridShow==true)
   {
     canvas.strokeWeight(10);
-    canvas.stroke(360, 100, 100);
+    canvas.stroke(221, 81, 93.81, .25);
+    canvas.noFill();
     gridN1.display();
     gridN2.display();
-//    A.keyColor=color(62.85, 19.95, 95.41);
-   
   }
 
   canvas.endDraw();
@@ -170,7 +313,6 @@ void keyPressed()
     }
   }
 }
-
 
 void mousePressed() {
 }

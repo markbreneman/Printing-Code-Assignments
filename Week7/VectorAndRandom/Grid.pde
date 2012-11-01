@@ -138,16 +138,16 @@ class ModularGrid
     }
   }
   
-  
+//  canvas.fill(240,0,94);
+//  canvas.strokeWeight(5);
+//  canvas.stroke(0, 0, 0);
   
   void display()
   {
-    canvas.noFill();
-//    canvas.fill(240,0,94);
-
+//    canvas.noFill();
     
     // draw the big bounding box
-//    canvas.rect(pageMarginW, pageMarginH, canvas.width - (2*pageMarginW), canvas.height - (2*pageMarginH));
+    // canvas.rect(pageMarginW, pageMarginH, canvas.width - (2*pageMarginW), canvas.height - (2*pageMarginH));
     
     // draw all modules
     for(int i = 0; i < cols; i++)

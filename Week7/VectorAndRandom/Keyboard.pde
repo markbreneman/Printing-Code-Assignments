@@ -180,70 +180,136 @@ class Keyboard {
           ));
       }
     }
-  }
-
-
-  void display() {
-    
-    
+  ///_____________SET PARAMETERS ABOUT KEYS:COLOR AND STATE_____________////
     for (int i=0; i<keysArray.size(); i++) {
       Key k= (Key) keysArray.get(i);
+      if (
+      k.c=="1" || 
+        k.c=="2" || 
+        k.c=="3" || 
+        k.c=="4" ||
+        k.c=="tab" ||
+        k.c=="caps lock" ||
+        k.c=="shift"||
+        k.c=="ctrl"|| 
+        k.c=="opt" || 
+        k.c=="cmd"||
+        k.c=="Q"||
+        k.c=="W"||
+        k.c=="E"||
+        k.c=="A"||
+        k.c=="S"||
+        k.c=="W"||
+        k.c=="D"||
+        k.c=="Z"||
+        k.c=="X"
+        ) {
+        k.keyColor=c1;
+        k.percentage=.25/12;
+        k.selected=true;
+      }
+
       //_______COLOR YELLOW KEYS_______//
-      if(
+      if (
       k.c=="5" || 
-      k.c=="6" || 
-      k.c=="R" || 
-      k.c=="T" || 
-      k.c=="F" || 
-      k.c=="G" || 
-      k.c=="C" || 
-      k.c=="V"){
-      k.keyColor=c2;
+        k.c=="6" || 
+        k.c=="R" || 
+        k.c=="T" || 
+        k.c=="F" || 
+        k.c=="G" || 
+        k.c=="C" || 
+        k.c=="V") {
+        k.keyColor=c2;
+        k.percentage=.25/8;
+        k.selected=true;
       }
       //_______COLOR LIGHT GREEN KEYS_______//
-      if(
+      if (
       k.c=="7" || 
-      k.c=="8" || 
-      k.c=="Y" ||
-      k.c=="U" || 
-      k.c=="H" || 
-      k.c=="J" ||
-      k.c=="B" || 
-      k.c=="N"){
-      k.keyColor=c3;
+        k.c=="8" || 
+        k.c=="Y" ||
+        k.c=="U" || 
+        k.c=="H" || 
+        k.c=="J" ||
+        k.c=="B" || 
+        k.c=="N") {
+        k.keyColor=c3;
+        k.percentage=.25/8;
+        k.selected=true;
       }
-      
-      if(
+
+      if (
       k.c=="9" || 
-      k.c=="0" || 
-      k.c=="-" || 
-      k.c=="+" ||
-      k.c=="delete" ||
-      k.c=="I" ||
-      k.c=="O"||
-      k.c=="P"|| 
-      k.c=="[" || 
-      k.c=="]"||
-      k.c=="K"||
-      k.c=="L"||
-      k.c==";"||
-      k.c=="'"||
-      k.c=="return"||
-      k.c=="M"||
-      k.c==","||
-      k.c=="."||
-      k.c=="?"||
-      k.c=="shift "||
-      k.c=="opt "||
-      k.c=="cmd "
-      ){
-      k.keyColor=c5;
+        k.c=="0" || 
+        k.c=="-" || 
+        k.c=="+" ||
+        k.c=="delete" ||
+        k.c=="I" ||
+        k.c=="O"||
+        k.c=="P"|| 
+        k.c=="[" || 
+        k.c=="]"||
+        k.c=="K"||
+        k.c=="L"||
+        k.c==";"||
+        k.c=="'"||
+        k.c=="return"||
+        k.c=="M"||
+        k.c==","||
+        k.c=="."||
+        k.c=="?"||
+        k.c=="shift "||
+        k.c=="opt "||
+        k.c=="cmd "
+        ) {
+        k.keyColor=c5;
+        k.percentage=.25/8;
+        k.selected=true;
       }
-      
-      if(
-      k.c==" "){
-      k.keyColor=c6;
+
+      if (
+      k.c==" ") {
+        k.keyColor=c6;
+        k.percentage=0;
       }
+
+      //_______SET KEY WHICH I IGNORE______//
+      if ( 
+      k.c=="tab" ||
+        k.c=="caps lock" ||
+        k.c=="shift"||
+        k.c=="ctrl"|| 
+        k.c=="opt" || 
+        k.c=="cmd"||
+        k.c=="[" || 
+        k.c=="]"||
+        k.c=="-" || 
+        k.c=="+" ||
+        k.c=="delete" ||
+        k.c==";"||
+        k.c=="'"||
+        k.c=="return"||
+        k.c=="M"||
+        k.c==","||
+        k.c=="."||
+        k.c=="?"||
+        k.c=="shift "||
+        k.c=="opt "||
+        k.c=="cmd "||
+        k.c==" "
+        ) {
+        k.percentage=0;
+        k.selected=false;
+        k.used=true;
+      }
+    }
+    
+    
+  }
+
+  void display() {
+    for (int i=0; i<keysArray.size(); i++) {
+      Key k= (Key) keysArray.get(i);
       k.display();
     }
   }
