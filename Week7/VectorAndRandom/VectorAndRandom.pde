@@ -35,8 +35,16 @@ int gridN1PMHeight=0;
 
 ModularGrid gridN2;
 Monitor monitor;
+Keyboard keyboard;
 ArrayList keysArray;
 Key Key;
+//Key A;
+color c1;  
+color c2;  
+color c3;  
+color c4;
+color c5;
+color c6;
 
 Boolean gridShow=false;
 String showing="Not Showing";
@@ -49,28 +57,25 @@ void setup() {
   int height = int(width*paper_ratio);
   size(width, height);
   colorMode(HSB, 360, 100, 100, 1);
-  //  frameRate(5);
   background(0, 0, 69, 1);
-
+  //DEFINE FONT
   RG.init(this);
   font = new RFont( "Gotham-Bold.ttf", 55, RFont.CENTER);
-
+  //DEFINE COLORS **AFTER SWITCHING TO HSB MODE**
+  c1 = color(352.09, 86, 92.52);  
+  c2 = color(62.85, 19.95, 95.41);  
+  c3 = color(97.62, 18.55, 73.42);  
+  c4 = color(152.57, 11.25, 75.99);
+  c5 = color(96.04, 17.83, 47.92);
+  c6 = color(0,0,3);
 
   canvas = createGraphics(canvas_width, canvas_height);
   calculateResizeRatio();
-
 
   canvas.beginDraw();
   canvas.colorMode(HSB, 360, 100, 100, 1);
   canvas.background(0, 0, 100, .5);
   canvas.smooth();
-
-  //  canvas.translate(canvas.width/2,canvas.height/2);
-  //  canvas.fill(0,0,100);
-  //  canvas.stroke(0,0,0);
-  //  canvas.strokeWeight(10);
-  //  font.draw("Test",canvas);
-  //  
 
   //Grid - Main grid
   // COLUMNS,ROWS GUTTTERSIZE, PAGEMARGIN WIDTH, PAGEMARGIN HEIGHT  
@@ -96,209 +101,27 @@ void setup() {
   canvas.noStroke();
   //Display the Print Area
   grid.display();  
-
   //Draw the Monitor
   monitor=new Monitor();
-
-  //Row1
-  canvas.strokeWeight(canvas.width/400);
-  println("The thick Stroke is " + canvas.width/400);
-
-  int j = 49;  
-
-  String[] row1= {
-    "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "+", "delete"
-  };
-  String[] row2= {
-    "tab", "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "[", "]"
-  };
-  String[] row3= {
-    "caps lock", "A", "S", "D", "F", "G", "H", "J", "K", "L", ";", "'", "return"
-  };
-  String[] row4= {
-    "shift", "Z", "X", "C", "V", "B", "N", "M", ",", ".", "?", "shift"
-  };
-
-  String[] row5= {
-    "ctrl", "opt", "cmd", " ", "cmd", "opt"
-  };
-
-  int keySpacing=30;
-
-  //ROW 1
-  keysArray=new ArrayList();
-
-  for (int i=0; i<row1.length;i++) {
-    if (i<row1.length-1) {
-      keysArray.add(
-      new Key(
-      gridN1.modules[1][0].x+i*(gridN1.modules[1][0].x/2-keySpacing), 
-      gridN1.modules[1][17].y, 
-      gridN1.modules[1][0].w/2, 
-      gridN1.modules[1][0].w/2, 
-      row1[i]
-        )
-        );
-    }
-    //DELETE KEY LARGER WIDTH 
-    else if (i==row1.length-1) {
-      keysArray.add(  
-      new Key(
-      gridN1.modules[1][0].x+i*(gridN1.modules[1][0].x/2-keySpacing), 
-      gridN1.modules[1][17].y, 
-      gridN1.modules[1][0].w, 
-      gridN1.modules[1][0].w/2, 
-      row1[i]
-        )
-        );
-    }
-  }
-
-
-  //ROW 2
-  for (int i=0; i<row2.length;i++) {
-    if (i<1) {
-      keysArray.add(
-      new Key(
-      gridN1.modules[1][0].x-gridN1.modules[1][0].w/4, 
-      gridN1.modules[1][17].y+gridN1.modules[1][0].w/2+keySpacing, 
-      gridN1.modules[1][0].w, 
-      gridN1.modules[1][0].w/2, 
-      row2[i]
-        ));
-    }
-    else if (i>=1) {
-      keysArray.add(
-      new Key(
-      gridN1.modules[1][0].x-gridN1.modules[1][0].w/4+gridN1.modules[1][0].w/2+i*(gridN1.modules[1][0].w/2+keySpacing), 
-      gridN1.modules[1][17].y+gridN1.modules[1][0].w/2+keySpacing, 
-      gridN1.modules[1][0].w/2, 
-      gridN1.modules[1][0].w/2, 
-      row2[i]
-        ));
-    }
-  } 
-
-
-//ROW 3
-  for (int i=0; i<row3.length;i++) {
-    if (i<1) {
-      keysArray.add(
-      new Key(
-      gridN1.modules[1][0].x-gridN1.modules[1][0].w/4+keySpacing, 
-      gridN1.modules[1][17].y+gridN1.modules[1][0].w+keySpacing*2, 
-      gridN1.modules[1][0].w+keySpacing*2, 
-      gridN1.modules[1][0].w/2, 
-      row3[i]
-        ));
-    }
-    if (i>=1 && i<(row3.length-1)) {
-      keysArray.add(
-      new Key( 
-      gridN1.modules[1][0].x-gridN1.modules[1][0].w+keySpacing*2+gridN1.modules[1][0].w+keySpacing*2+keySpacing+i*(gridN1.modules[1][0].w/2+keySpacing),
-      gridN1.modules[1][17].y+gridN1.modules[1][0].w+keySpacing*2, 
-      gridN1.modules[1][0].w/2, 
-      gridN1.modules[1][0].w/2, 
-      row3[i]
-        ));
-    }
-    else if (i==row3.length-1) {
-      keysArray.add(
-      new Key(
-      gridN1.modules[1][0].x-gridN1.modules[1][0].w/4+gridN1.modules[1][0].w/2+keySpacing*3+i*(gridN1.modules[1][0].w/2+keySpacing), 
-      gridN1.modules[1][17].y+gridN1.modules[1][0].w+keySpacing*2, 
-      gridN1.modules[1][0].w-keySpacing*2, 
-      gridN1.modules[1][0].w/2, 
-      row3[i]
-        ));
-    }
-  } 
-  
-  //ROW 4
-  for (int i=0; i<row4.length;i++) {
-    if (i<1) {
-      keysArray.add(
-      new Key(
-      gridN1.modules[1][0].x-gridN1.modules[1][0].w/4+keySpacing*3, 
-      gridN1.modules[1][17].y+gridN1.modules[1][0].w*2-keySpacing, 
-      gridN1.modules[1][0].w+keySpacing*3, 
-      gridN1.modules[1][0].w/2, 
-      row4[i]
-        ));
-    }
-    if (i>=1 && i<(row4.length-1)) {
-      keysArray.add(
-      new Key( 
-      gridN1.modules[1][0].x-gridN1.modules[1][0].w+keySpacing*4+gridN1.modules[1][0].w+keySpacing*3+keySpacing+i*(gridN1.modules[1][0].w/2+keySpacing),
-      gridN1.modules[1][17].y+gridN1.modules[1][0].w*2-keySpacing,
-      gridN1.modules[1][0].w/2, 
-      gridN1.modules[1][0].w/2, 
-      row4[i]
-        ));
-    }
-    else if (i==row4.length-1) {
-      keysArray.add(
-      new Key(
-      gridN1.modules[1][0].x-gridN1.modules[1][0].w/4+gridN1.modules[1][0].w/2+keySpacing*5+i*(gridN1.modules[1][0].w/2+keySpacing)+keySpacing, 
-      gridN1.modules[1][17].y+gridN1.modules[1][0].w*2-keySpacing,
-      gridN1.modules[1][0].w+keySpacing*3, 
-      gridN1.modules[1][0].w/2, 
-      row4[i]
-        ));
-    }
-  } 
-  
-//  Key J= (Key)keysArray.get(38);
-//  println(J.c);
-
-//ROW 5
-  for (int i=0; i<row5.length;i++) {
-    if (i<3) {
-      keysArray.add(
-      new Key(
-      gridN1.modules[2][0].x-keySpacing+i*(gridN1.modules[1][0].w/2)+i*keySpacing, 
-      gridN1.modules[1][17].y+gridN1.modules[1][0].w*4/2+keySpacing*4, 
-      gridN1.modules[1][0].w/2, 
-      gridN1.modules[1][0].w/2, 
-      row5[i]
-        ));
-    }
-    if (i==3) {
-      keysArray.add(
-      new Key( 
-      gridN1.modules[2][0].x-keySpacing+i*(gridN1.modules[1][0].w/2)+i*keySpacing, 
-      gridN1.modules[1][17].y+gridN1.modules[1][0].w*4/2+keySpacing*4, 
-      gridN1.modules[1][0].w*3+keySpacing, 
-      gridN1.modules[1][0].w/2, 
-      row5[i]
-        ));
-    }
-    else if (i>3 && i< row5.length) {
-      keysArray.add(
-      new Key(
-      gridN1.modules[2][0].x-keySpacing+gridN1.modules[1][0].w*2.5+keySpacing+i*(gridN1.modules[1][0].w/2)+i*keySpacing, 
-      gridN1.modules[1][17].y+gridN1.modules[1][0].w*4/2+keySpacing*4, 
-      gridN1.modules[1][0].w/2, 
-      gridN1.modules[1][0].w/2, 
-      row5[i]
-        ));
-    }
-  } 
-
+  keyboard=new Keyboard();
+//  A = new Key(1000,1000,1000,1000,"j");
 }
 
 void draw() {
-
-
+  canvas.background(0, 0, 100);
+  monitor.display();
+  keyboard.display();
+//  A.display();
+//  println(hex(A.c1));
+//  
   if (gridShow==true)
   {
+    canvas.strokeWeight(10);
+    canvas.stroke(360, 100, 100);
     gridN1.display();
     gridN2.display();
-  }
-
-  if (gridShow==false && showing.equals("Not Showing"))
-  {
-    canvas.stroke(0, 0, 0, .3);
+//    A.keyColor=color(62.85, 19.95, 95.41);
+   
   }
 
   canvas.endDraw();

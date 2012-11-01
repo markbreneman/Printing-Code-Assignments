@@ -8,8 +8,7 @@ class Key {
   float cx;
   float cy;
   String  c;
-  
-  Key() {}
+  color keyColor;
   
   Key(float _x, float _y, float _w, float _h, String _c) {
     
@@ -20,9 +19,14 @@ class Key {
     r=20;
     cx=x+w/2;
     cy=y+h/2;
-    c=_c;  
-    
-    canvas.rect(x,y,w,h,r,r,r,r);
+    c=_c;
+    keyColor=c1;
+  }
+  
+  void display() {
+  canvas.strokeWeight(7);
+  canvas.fill(keyColor);
+  canvas.rect(x,y,w,h,r,r,r,r);
     
     //Get the Center of the Passed In Character
     RGroup grp;
@@ -37,7 +41,5 @@ class Key {
           
     font.draw(c,canvas);
     canvas.popMatrix();
-        
   }
-  
 }
