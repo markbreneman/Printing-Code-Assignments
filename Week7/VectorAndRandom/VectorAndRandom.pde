@@ -105,23 +105,11 @@ void setup() {
   c5 = color(96.04, 17.83, 47.92);
   c6 = color(0, 0, 3); // PrintingBlack
   //COLORs WITH TRANSPARENCY
-  c7 = color(352.09, 86, 92.52, .5);  
-  c8 = color(62.85, 19.95, 95.41, .5);  
-  c9 = color(97.62, 18.55, 73.42, .5);  
-  c10 = color(152.57, 11.25, 75.99, .5);
-  c11 = color(96.04, 17.83, 47.92, .5);
-  
-//  Colors=new ArrayList();
-//  Colors.add(c1);
-//  C   olors.add(c2);
-//  Colors.add(c3);
-//  Colors.add(c4);
-//  Colors.add(c5);
-//  Colors.add(c6);
-//  Colors.add(c7);
-//  Colors.add(c9);
-//  Colors.add(c10);
-//  Colors.add(c11);
+  c7 = color(352.09, 86, 92.52, .75);  
+  c8 = color(62.85, 19.95, 95.41, .75);  
+  c9 = color(97.62, 18.55, 73.42, .75);  
+  c10 = color(152.57, 11.25, 75.99, .75);
+  c11 = color(96.04, 17.83, 47.92, .75);
   
   canvas = createGraphics(canvas_width, canvas_height);
   calculateResizeRatio();
@@ -205,23 +193,18 @@ void setup() {
  
   for (int i=0; i<numbersOfLetters; i++) {
     Vec2D chosenKey = selectedKeyPoints.get(i);
-    float randKeyX =random(chosenKey.x+(gridN1.modules[10][0].w/2), chosenKey.x+gridN1.modules[10][0].w*5);
-    float randKeyY =random(chosenKey.y-(gridN1.modules[10][0].h)*10, chosenKey.y-gridN1.modules[10][0].h*22);
+    float randKeyX =random(chosenKey.x+(gridN1.modules[10][0].w), chosenKey.x+gridN1.modules[10][0].w*5);
+    float randKeyY =random(chosenKey.y-(gridN1.modules[10][0].h)*10, chosenKey.y-gridN1.modules[10][0].h*30);
     Vec2D randKey = new Vec2D(randKeyX, randKeyY);
+    println(randKey);
     random1Points.add(randKey);
 
     Vec2D chosenLetter = letterPoints.get(i);
     float randletterX =random(chosenLetter.x-(gridN1.modules[10][0].w), chosenLetter.x-gridN1.modules[10][0].w*8);
-    float randletterY =random(chosenLetter.y+(gridN1.modules[10][0].h)*8, chosenLetter.y+gridN1.modules[10][0].h*10);
+    float randletterY =random(chosenLetter.y+(gridN1.modules[10][0].h)*4, chosenLetter.y+gridN1.modules[10][0].h*12);
     Vec2D randLetter = new Vec2D(randletterX, randletterY);
     random2Points.add(randLetter);
   }
- 
-   //  println("selected Key points = " + selectedKeyPoints);
-  //  println("random1Points = " + random1Points);
-  //  println("random2Points = " + random2Points); 
-  //  println("selected Letter points = " + letterPoints);
- 
   
   pointsList = new ArrayList();
   

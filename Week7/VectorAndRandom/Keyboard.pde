@@ -220,7 +220,7 @@ class Keyboard {
         k.c=="C" || 
         k.c=="V") {
         k.keyColor=c2;
-        k.percentage=.25/8;
+        k.percentage=.25;
         k.selected=true;
       }
       //_______COLOR LIGHT GREEN KEYS_______//
@@ -234,7 +234,7 @@ class Keyboard {
         k.c=="B" || 
         k.c=="N") {
         k.keyColor=c3;
-        k.percentage=.25/8;
+        k.percentage=.25;
         k.selected=true;
       }
 
@@ -263,7 +263,7 @@ class Keyboard {
         k.c=="cmd "
         ) {
         k.keyColor=c5;
-        k.percentage=.25/8;
+        k.percentage=.25;
         k.selected=true;
       }
 
@@ -275,7 +275,17 @@ class Keyboard {
 
       //_______SET KEY WHICH I IGNORE______//
       if ( 
-      k.c=="tab" ||
+        k.c=="1" ||
+        k.c=="2" ||
+        k.c=="3" ||
+        k.c=="4" ||
+        k.c=="5" ||
+        k.c=="6" ||
+        k.c=="7" ||
+        k.c=="8" ||
+        k.c=="9" ||
+        k.c=="0" ||
+        k.c=="tab" ||
         k.c=="caps lock" ||
         k.c=="shift"||
         k.c=="ctrl"|| 
