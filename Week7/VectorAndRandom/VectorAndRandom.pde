@@ -106,10 +106,13 @@ void setup() {
   c6 = color(0, 0, 3); // PrintingBlack
   //COLORs WITH TRANSPARENCY
   c7 = color(352.09, 86, 92.52, .75);  
-  c8 = color(62.85, 19.95, 95.41, .75);  
+  c8 = color(62.85, 42, 95.41, .75);  
   c9 = color(97.62, 18.55, 73.42, .75);  
-  c10 = color(152.57, 11.25, 75.99, .75);
+//  c10 = color(152.57, 11.25, 75.99, .75);
+  c10 = color(324.47, 100, 92.61, .75);
   c11 = color(96.04, 17.83, 47.92, .75);
+  
+  
   
   canvas = createGraphics(canvas_width, canvas_height);
   calculateResizeRatio();

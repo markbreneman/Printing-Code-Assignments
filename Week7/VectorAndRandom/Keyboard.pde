@@ -205,7 +205,7 @@ class Keyboard {
         k.c=="X"
         ) {
         k.keyColor=c1;
-        k.percentage=.25/12;
+        k.percentage=.8;
         k.selected=true;
       }
 
@@ -220,7 +220,7 @@ class Keyboard {
         k.c=="C" || 
         k.c=="V") {
         k.keyColor=c2;
-        k.percentage=.25;
+        k.percentage=.8;
         k.selected=true;
       }
       //_______COLOR LIGHT GREEN KEYS_______//
@@ -234,12 +234,12 @@ class Keyboard {
         k.c=="B" || 
         k.c=="N") {
         k.keyColor=c3;
-        k.percentage=.25;
+        k.percentage=.8;
         k.selected=true;
       }
-
+      //_______COLOR DARk GREEN KEYS_______//
       if (
-      k.c=="9" || 
+        k.c=="9" || 
         k.c=="0" || 
         k.c=="-" || 
         k.c=="+" ||
@@ -263,7 +263,7 @@ class Keyboard {
         k.c=="cmd "
         ) {
         k.keyColor=c5;
-        k.percentage=.25;
+        k.percentage=.85;
         k.selected=true;
       }
 
