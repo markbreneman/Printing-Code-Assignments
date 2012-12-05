@@ -427,15 +427,15 @@ void initControls() {
   
 }
 
-void controlEvent(ControlEvent theEvent) {
-  if (theEvent.isGroup()) {
-    // check if the Event was triggered from a ControlGroup
-    if (theEvent.group().name() == "canvasSelect") {
-      selectedCanvas = "Canvas "+String.valueOf(int(theEvent.group().value()));
-    }
-  } 
-  else if (theEvent.isController()) {
-    selectedCanvas = "Canvas ";
-  }
-}
+//void controlEvent(ControlEvent theEvent) {
+//  if (theEvent.isGroup()) {
+//    // check if the Event was triggered from a ControlGroup
+//    if (theEvent.group().name() == "canvasSelect") {
+//      selectedCanvas = "Canvas "+String.valueOf(int(theEvent.group().value()));
+//    }
+//  } 
+//  else if (theEvent.isController()) {
+//    selectedCanvas = "Canvas ";
+//  }
+//}
 
