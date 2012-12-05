@@ -37,14 +37,20 @@ ControlWindow controlWindow;
 DropdownList canvasSelector;
 String selectedCanvas;
 //Positional 2D Slider
-Slider2D speechBubble1;
+Slider2D stripesTarget;
 //Height and Width Sliders
-Slider S1;
-Slider S2;
-ModularGrid grid;
-ModularGrid gridN1;
-boolean selected1;
-boolean selected2; 
+Slider S1, S2;
+ModularGrid grid, gridN1;
+
+boolean selected1,selected2;
+
+
+//////_____STRIPE DETAILS____//////////////
+PVector target;
+Stripes stripes;
+/////______COLORS______//////////
+color c1, c2;
+
 
 void setup() {
   //I like to work with a display that is the same aspect ratio as the paper 
@@ -68,30 +74,36 @@ void setup() {
   selected1 = false;
   selected2 = false;
 
-  
-
   canvas.beginDraw();
   canvas.colorMode(HSB, 360, 100, 100, 1);
-//  canvas.background(0, 0, 100, .5);
-  
   canvas.smooth();
-
+  //SETUP GRID
   //Grid 1 - Manuscript Grid
   // COLUMNS,ROWS GUTTTERSIZE, PAGEMARGIN WIDTH, PAGEMARGIN HEIGHT
-  grid = new ModularGrid(gridCols, gridRows, gridGutter, gridPMWidth, gridPMHeight);  
+  grid = new ModularGrid(gridCols, gridRows, gridGutter, gridPMWidth, gridPMHeight, .5);  
 
   //Nested Grids for Chairs
-   // COLUMNS,ROWS GUTTTERSIZE, PAGEMARGIN WIDTH, PAGEMARGIN HEIGHT, CONTAINER MODULE
+  // COLUMNS,ROWS GUTTTERSIZE, PAGEMARGIN WIDTH, PAGEMARGIN HEIGHT, CONTAINER MODULE
   gridN1 = new ModularGrid(gridN1Cols, gridN1Rows, gridN1Gutter, gridN1PMWidth, gridN1PMHeight, grid.modules[0][0]);
- 
+
+  // //SETUP STRIPES
+  c1 = color(267.72, 60.66, 59.07); // Purple
+  c2 = color(199.24, 58.84, 92.96); // Blue 
+  target = new PVector(random(0, 15), random(0, 15));
 }
 
 void draw() {
   canvas.background(0, 0, 100 );
   canvas.noStroke();
-      
+
   //Show the manuscript grid
   gridN1.display();
+  stripes= new Stripes(gridN1.modules[(int)target.x][(int)target.y]);  
+  //Drawing Stripes
+  stripes.display();
+  //Updating Stripes with Control P5
+  target.x = stripesTarget.arrayValue()[0];
+  target.y = stripesTarget.arrayValue()[1]; 
 
   if (gridShow==true)
   {
@@ -107,7 +119,7 @@ void draw() {
   }
 
   canvas.endDraw();
-  
+
   float resizedWidth = (float) canvas.width * ratio;
   float resizedHeight = (float) canvas.height * ratio;
 
@@ -155,7 +167,6 @@ void keyPressed()
   if (key==',') controlP5.window("controlP5window").hide();
   if (key=='.') controlP5.window("controlP5window").show();
 }
-
 
 
 
