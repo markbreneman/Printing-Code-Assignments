@@ -16,8 +16,4 @@ class Module
     h = _h;
   } 
   
-  void display(){
-  canvas.fill(255,0,0);
-  canvas.rect(x,y,w,h);
-  }
 }

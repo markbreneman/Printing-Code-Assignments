@@ -23,48 +23,50 @@ class Stripes
     modY = _module.y;
     modW = _module.w;
     modH = _module.h;
-
+    
+    int strokeFix=3; //Just to Cover up Stroke.
     //VERTICAL STRIPE PARAMETERS
-    stripeVX=modX;
+    stripeVX=modX-strokeFix;
     stripeVY=0;
-    stripeVW=modW;
-    stripeVH=modY+modH*2+gridN1Gutter;
+    stripeVW=modW+strokeFix*2;
+    stripeVH=modY+modH*2+gridN1Gutter+strokeFix*2;
 
     //HORIZONTAL STRIPE PARAMETERS
     stripeHX=0;
-    stripeHY=modY;
-    stripeHW=modX+modW*2+gridN1Gutter;
-    stripeHH=modH;
+    stripeHY=modY-strokeFix;
+    stripeHW=modX+modW*2+gridN1Gutter+strokeFix*2;
+    stripeHH=modH+strokeFix*2;
   } 
 
   void display() {
-    canvas.fill(255, 0, 0);
-    setGradient(stripeVX, stripeVY, stripeVW, stripeVH, c1, c2, 0);
-    setGradient(stripeHX, stripeHY, stripeHW, stripeHH, c1, c2, 1);
 
-    //    canvas.rect(stripeVX, stripeVY, stripeVW, stripeVH);
-    //    canvas.rect(stripeHX, stripeHY, stripeHW, stripeHH);
+    setGradient(stripeHX, stripeHY, stripeHW, stripeHH, c3, c4, 1);
+    setGradient(stripeVX, stripeVY, stripeVW, stripeVH, c3, c4, 0);
+    
+    canvas.shape(imgLogo,modX,modY,modW,modH);
+//    canvas.blend(int(modX), int(modY), int(modW), int(modH), int(modX-30), int(modY-30), int(modW), int(modH), BLEND);
+
   }
 
 
-  void setGradient(float x, float y, float w, float h, color c1, color c2, int axis ) {
+void setGradient(float _x, float _y, float _w, float _h, color c3, color c4, int axis ) {
 
     canvas.noFill();
 
     if (axis == 0) {  // Top to bottom gradient
-      for (int i = int(y); i <= y+h; i++) {
-        float inter = map(i, y, y+h, 0, 1);
-        color c = lerpColor(c1, c2, inter);
+      for (int i = int(_y); i <= _y+_h; i++) {
+        float inter = map(i, _y, _y+_h, 0, 1);
+        color c = lerpColor(c3, c4, inter);
         canvas.stroke(c);
-        canvas.line(x, i, x+w, i);
+        canvas.line(_x, i, _x+_w, i);
       }
     }  
     else if (axis == 1) {  // Left to right gradient
-      for (int i = int(x); i <= x+w; i++) {
-        float inter = map(i, x, x+w, 0, 1);
-        color c = lerpColor(c1, c2, inter);
+      for (int i = int(_x); i <= _x+_w; i++) {
+        float inter = map(i, _x, _x+_w, 0, 1);
+        color c = lerpColor(c3, c4, inter);
         canvas.stroke(c);
-        canvas.line(i, y, i, y+h);
+        canvas.line(i, _y, i, _y+_h);
       }
     }
   }
