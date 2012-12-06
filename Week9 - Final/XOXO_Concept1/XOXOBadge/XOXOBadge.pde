@@ -1,10 +1,10 @@
 PGraphics canvas;
 PFont font1, font2, font3;
-PShape imgLogo;
+PShape imgLogo1, imgLogo2;
 
 //Dimensions of Plotter Paper in Inches
-float paper_width = 17;
-float paper_height = 25;
+float paper_width = 4;
+float paper_height = 6;
 float paper_ratio = paper_height/paper_width;
 
 //Dimensions of an Paper in Pixels at 300dpi
@@ -18,7 +18,6 @@ float ratio = 1;
 //////_____GRID VARIABLES_____//////////////
 ModularGrid grid, gridN1;
 int gridCols, gridRows, gridGutter, gridPMWidth, gridPMHeight;
-
 int gridN1Cols, gridN1Rows, gridN1Gutter, gridN1PMWidth, gridN1PMHeight;
 
 Boolean gridShow=false;
@@ -29,32 +28,33 @@ import controlP5.*;
 ControlP5 controlP5;
 ControlWindow controlWindow;
 Slider2D stripesTarget;
-Slider2D titleTarget;
+Slider2D nameTarget;
 Slider S1, S2, S3, S4, S5;
 
 //////_____STRIPE DETAILS____//////////////
 PVector target;
 Stripes stripes;
 /////______COLORS______//////////
-color c1, c2, c3, c4, c5;
+color c1, c2, c3, c4, c5, c6;
 
 /////______COPY______//////////
-String  title, tagline, details;
-PVector titlePos, detailsPos;
-int titleSize, taglineSize, detailsSize;
+String  title, name, tagline, details;
+PVector titlePos, namePos, detailsPos;
+int titleSize, nameSize, taglineSize, detailsSize;
 int rectWidth, rectHeight;
 
 void setup() {
   //I like to work with a display that is the same aspect ratio as the paper 
   //I set a width and the height corresponds
-  int width = 550;//Change this number to get a display window with papers aspect ratio
+  int width = 400;//Change this number to get a display window with papers aspect ratio
   int height = int(width*paper_ratio);
   //FONTS AND ARTWORK
   font1 = loadFont("Tungsten-Medium-48.vlw");
   font2 = loadFont("Atrament-Medium-48.vlw");
   font3 = loadFont("Atrament-MediumItalic-48.vlw");
 
-  imgLogo = loadShape("logo-blue.svg");
+  imgLogo1 = loadShape("logo-blue.svg");
+  imgLogo2 = loadShape("logo.svg");
 
   size(width, height);
   colorMode(HSB, 360, 100, 100, 1);
@@ -70,16 +70,16 @@ void setup() {
   gridCols=1;
   gridRows=1;
   gridGutter=100;
-  gridPMWidth=450;
-  gridPMHeight=600;
+  gridPMWidth=80;
+  gridPMHeight=200;
 
   // COLUMNS,ROWS GUTTTERSIZE, PAGEMARGIN WIDTH, PAGEMARGIN HEIGHT
-  grid = new ModularGrid(gridCols, gridRows, gridGutter, gridPMWidth, gridPMHeight, .5);  
+  grid = new ModularGrid(gridCols, gridRows, gridGutter, gridPMWidth, gridPMHeight, .5, 200);  
 
   //NESTED GRID OF "CHAIRS"
   gridN1Cols=16;
   gridN1Rows=25;
-  gridN1Gutter=60;
+  gridN1Gutter=15;
   gridN1PMWidth=0;
   gridN1PMHeight=0;
   // COLUMNS,ROWS GUTTTERSIZE, PAGEMARGIN WIDTH, PAGEMARGIN HEIGHT, CONTAINER MODULE
@@ -87,28 +87,34 @@ void setup() {
 
   //SETUP STRIPES
   c1 = color(346.55, 10.65, 13.75); // Black for print
-  c2 = color(211.62, .42, 94.94); // White for print
+  c2 = color(0, 0, 100); // White for print
+  //  c2 = color(211.62, .42, 94.94); // White for print
   c3 = color(267.72, 60.66, 59.07); // Purple
   c4 = color(199.24, 58.84, 92.96); // Blue 
-  c5 = color(50,5,100); //Off White
+  c5 = color(50, 5, 100); //Off White
+  //  c6 = color(253, 60, 66);//Deeper Purple
+  c6 = color(279, 100, 62);//Deeper Purple
   target = new PVector(random(0, 15), random(0, 15));
 
   //SETUP COPY
-  //  titleSize=int(textWidth(tagline));
-
-
   title = "XOXO";
-  titlePos=new PVector(random(300, canvas.width-textWidth(title)), random(125, canvas.height));
-  titleSize=1510;
+  titlePos= new PVector(canvas.width/2, 200);
+  titleSize=150;
+  //  nameSize=int(textWidth(tagline));
+  name = "Jesse"+"\n"+"Thomas";
+  //  name = "Ann Larie "+"\n"+"Valentine";
 
-  tagline = "An arts and technology festival"+"\n"+"celebrating disruptive creativity.";
-  taglineSize=200;
+  namePos=new PVector(random(300, canvas.width-textWidth(name)), random(125, canvas.height));
+  nameSize=280;
+
+  tagline = "Jess3." + "\n" + "@jess3" ;
+  taglineSize=70;
 
   details = "YALE UNION CONTEMPORARY | PORTLAND, OR | SEPTEMBER 13-16 2013";
   detailsPos=new PVector(gridN1.modules[0][0].x, gridN1.modules[0][gridN1Rows-1].y+gridN1.modules[0][gridN1Rows-1].h*3);
-  detailsSize=235;
-//  rectWidth=2121;
-//  rectHeight=1550;  
+  detailsSize=58;
+  //  rectWidth=2121;
+  //  rectHeight=1550;  
 
   //SETUP CONTROL P5 CONTROLS
   controlP5 = new ControlP5(this);
@@ -119,12 +125,12 @@ void setup() {
 }
 
 void draw() {
-  canvas.background(50,5,100);
+  canvas.background(50, 5, 100);
   canvas.noStroke();
 
   //SHOW THE GRID OF CHAIRS
   canvas.noFill();
-  canvas.strokeWeight(10);
+  canvas.strokeWeight(3);
   canvas.stroke(254.73, 2.62, 25.86);
   gridN1.display();
 
@@ -135,24 +141,43 @@ void draw() {
   target.x = stripesTarget.arrayValue()[0];
   target.y = stripesTarget.arrayValue()[1];
 
+  //DRAWING HEADER
+  canvas.fill(c3);
+  canvas.rect(0, 0, canvas.width, 250);
+  canvas.fill(c2);
+  canvas.textFont(font1, titleSize);
+  canvas.textAlign(CENTER);
+  canvas.text(title, titlePos.x-textWidth(title)/2-40, 200);
+  canvas.shape(imgLogo2, 650, 90, 120, 120);
+
   //DRAWING COPY
   canvas.noStroke();
   canvas.fill(c5);
-  //MASKING RECTANGLE: HARDCODED -10 & 1.5 ARE TO ENSURE STROKE COVERAGE
-  canvas.rect(
-  titlePos.x-10, 
-  titlePos.y+gridN1.modules[0][0].h*2+gridN1Gutter*1.5,
-  gridN1.modules[0][0].w*8+gridN1Gutter*8, 
-  -gridN1.modules[0][0].h*6-gridN1Gutter*6
-  ); 
-  canvas.textFont(font1, titleSize); 
-  canvas.fill(c1);
-  canvas.text(title, titlePos.x, titlePos.y); 
-  titlePos.x = gridN1.modules[(int)titleTarget.arrayValue()[0]][(int)titleTarget.arrayValue()[1]].x;
-  titlePos.y = gridN1.modules[(int)titleTarget.arrayValue()[0]][(int)titleTarget.arrayValue()[1]].y;
+  canvas.textAlign(LEFT);
+  //MASKING RECTANGLES: HARDCODED -10 & 1.5 ARE TO ENSURE STROKE COVERAGE
   
+  canvas.rect(
+  namePos.x-10, 
+  namePos.y+gridN1.modules[0][0].h*2+gridN1Gutter*1.5, 
+  gridN1.modules[0][0].w*7+gridN1Gutter*7, 
+  -gridN1.modules[0][0].h*6-gridN1Gutter*6
+    ); 
+  
+  canvas.rect(
+  namePos.x-10, 
+  namePos.y+gridN1.modules[0][0].h*2+gridN1Gutter*1.5, 
+  gridN1.modules[0][0].w*9+gridN1Gutter*9, 
+  gridN1.modules[0][0].h*5+gridN1Gutter*5
+    );   
+    
+  canvas.textFont(font1, nameSize); 
+  canvas.fill(c1);
+  canvas.text(name, namePos.x, namePos.y); 
+  namePos.x = gridN1.modules[(int)nameTarget.arrayValue()[0]][(int)nameTarget.arrayValue()[1]].x;
+  namePos.y = gridN1.modules[(int)nameTarget.arrayValue()[0]][(int)nameTarget.arrayValue()[1]].y;
+
   canvas.textFont(font3, taglineSize);
-  canvas.text(tagline, titlePos.x, titlePos.y+taglineSize);
+  canvas.text(tagline, namePos.x, namePos.y+nameSize+taglineSize*2);
 
   canvas.textFont(font1, detailsSize);
   canvas.text(details, detailsPos.x, detailsPos.y);

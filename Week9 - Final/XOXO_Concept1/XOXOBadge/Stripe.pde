@@ -43,7 +43,7 @@ class Stripes
     setGradient(stripeHX, stripeHY, stripeHW, stripeHH, c3, c4, 1);
     setGradient(stripeVX, stripeVY, stripeVW, stripeVH, c3, c4, 0);
     
-    canvas.shape(imgLogo,modX,modY,modW,modH);
+    canvas.shape(imgLogo1,modX,modY,modW,modH);
 //    canvas.blend(int(modX), int(modY), int(modW), int(modH), int(modX-30), int(modY-30), int(modW), int(modH), BLEND);
 
   }
