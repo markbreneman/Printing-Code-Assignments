@@ -82,25 +82,28 @@ void setup() {
   colors.add(c6);
 
   //SETUP TRIANGLE OBJECTS
-  triSize=100;
+  triSize=30;
   triHeight=sqrt(3)/2*(triSize);
   triangleObjects= new ArrayList();
   color c7 = colors.get(int(random(2, 6)));
+  //Calculate Max Objects per Width/Height  
+  println("w increments" + canvas.width/triSize);
+  println("h increments" + canvas.height/triSize);
+
+
   //RIGHTPOINT TRIANGLES
-  for (int j = 0;j<canvas.width; j++) {
-    for (int i = 0; i<canvas.height; i++) {  
-//    for (int j = 0;j<5; j++) {
-//    for (int i = 0; i<5; i++) {
-      PVector startPoint=new PVector(0,0);//Initialized Locally
+  for (int j = 0;j<canvas.width/triSize; j++) {
+    for (int i = 0; i<canvas.height/triSize; i++) {  
+      PVector startPoint=new PVector(0, 0);//Initialized Locally
 
       //////COLOR SELECTIONS
       //EVEN COL AND ROW
       if (j%2==0 && i%2==0) {
-        c7 = colors.get(4);
+        c7 = colors.get(3);
       }
       //EVEN COL AND ODD ROW
       else if (j%2==0 && i%2!=0) {
-        c7 = colors.get(2);
+        c7 = colors.get(4);
       }
       //ODD COL AND EVEN ROW
       else if (j%2!=0 && i%2==0) {
@@ -108,45 +111,51 @@ void setup() {
       }
       //ODD COL AND ROW
       else if (j%2!=0 && i%2!=0) {
-        c7 = colors.get(3);
+        c7 = colors.get(4);
       }
       ///////STAGGER COL POSITIONS
-      if(j%2==0){startPoint = new PVector(0+j*triHeight,0+i*triSize);}
-      else if(j%2!=0){startPoint = new PVector(0+j*triHeight, -triSize/2+i*triSize);}
+      if (j%2==0) {
+        startPoint = new PVector(0+j*triHeight, 0+i*triSize);
+      }
+      else if (j%2!=0) {
+        startPoint = new PVector(0+j*triHeight, -triSize/2+i*triSize);
+      }
       //CREATE OBJECTS
       tmpTri = new Triobject(startPoint, triSize, c7, 0);
       triangleObjects.add(tmpTri);
     }
   }
   //LEFTPOINT TRIANGLES
-  for (int j = 0;j<canvas.width; j++) {
-    for (int i = 0; i<canvas.height; i++) {
-//  for (int j = 0;j<3; j++) {
-//    for (int i = 0; i<6; i++) {
-      
-      PVector startPoint=new PVector(0,0);//Initialized Locally
-      
+  for (int j = 0;j<canvas.width/triSize; j++) {
+    for (int i = 0; i<canvas.height/triSize; i++) { 
+
+      PVector startPoint=new PVector(0, 0);//Initialized Locally
+
       //////COLOR SELECTIONS
-      //EVEN COL & ROW
+    //EVEN COL AND ROW
       if (j%2==0 && i%2==0) {
-        c7 = colors.get(4);
+        c7 = colors.get(2);
       }
-      //EVEN COL & ODD ROW
+      //EVEN COL AND ODD ROW
       else if (j%2==0 && i%2!=0) {
         c7 = colors.get(5);
       }
-      //ODD COL & EVEN ROW
+      //ODD COL AND EVEN ROW
       else if (j%2!=0 && i%2==0) {
-        c7 = colors.get(2);
-      }
-      //ODD COL & ROW
-      else if (j%2!=0 && i%2!=0) {
         c7 = colors.get(3);
+      }
+      //ODD COL AND ROW
+      else if (j%2!=0 && i%2!=0) {
+        c7 = colors.get(5);
       }
 
       ///////STAGGER COL POSITIONS
-      if(j%2==0){startPoint = new PVector(triHeight+j*triHeight,-triSize/2+i*triSize);}
-      else if(j%2!=0){startPoint = new PVector(triHeight+j*triHeight, 0+i*triSize);}
+      if (j%2==0) {
+        startPoint = new PVector(triHeight+j*triHeight, -triSize/2+i*triSize);
+      }
+      else if (j%2!=0) {
+        startPoint = new PVector(triHeight+j*triHeight, 0+i*triSize);
+      }
       //CREATE OBJECTS
       tmpTri = new Triobject(startPoint, triSize, c7, 1);
       triangleObjects.add(tmpTri);
