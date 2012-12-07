@@ -38,9 +38,9 @@ Stripes stripes;
 color c1, c2, c3, c4, c5, c6;
 
 /////______COPY______//////////
-String  title, name, tagline, details;
+String  title, name, association, details;
 PVector titlePos, namePos, detailsPos;
-int titleSize, nameSize, taglineSize, detailsSize;
+int titleSize, nameSize, associationSize, detailsSize;
 int rectWidth, rectHeight;
 
 void setup() {
@@ -100,15 +100,17 @@ void setup() {
   title = "XOXO";
   titlePos= new PVector(canvas.width/2, 200);
   titleSize=150;
-  //  nameSize=int(textWidth(tagline));
-  name = "Jesse"+"\n"+"Thomas";
-  //  name = "Ann Larie "+"\n"+"Valentine";
+  
+  //  nameSize=int(textWidth(association));
+//  name = "Jesse"+"\n"+"Thomas";
+    name = "Ann Larie "+"\n"+"Valentine";
 
   namePos=new PVector(random(300, canvas.width-textWidth(name)), random(125, canvas.height));
-  nameSize=280;
-
-  tagline = "Jess3." + "\n" + "@jess3" ;
-  taglineSize=70;
+  nameSize=260;
+  
+  association = "Jess3" + "\n" + "@jess3" ;
+  association = "The Valentine Method" + "\n" + "@sanfranannie" ;
+  associationSize=65;
 
   details = "YALE UNION CONTEMPORARY | PORTLAND, OR | SEPTEMBER 13-16 2013";
   detailsPos=new PVector(gridN1.modules[0][0].x, gridN1.modules[0][gridN1Rows-1].y+gridN1.modules[0][gridN1Rows-1].h*3);
@@ -159,25 +161,33 @@ void draw() {
   canvas.rect(
   namePos.x-10, 
   namePos.y+gridN1.modules[0][0].h*2+gridN1Gutter*1.5, 
-  gridN1.modules[0][0].w*7+gridN1Gutter*7, 
+  gridN1.modules[0][0].w*11+gridN1Gutter*11, 
   -gridN1.modules[0][0].h*6-gridN1Gutter*6
     ); 
   
   canvas.rect(
   namePos.x-10, 
   namePos.y+gridN1.modules[0][0].h*2+gridN1Gutter*1.5, 
-  gridN1.modules[0][0].w*9+gridN1Gutter*9, 
+  gridN1.modules[0][0].w*11+gridN1Gutter*11, 
   gridN1.modules[0][0].h*5+gridN1Gutter*5
     );   
     
-  canvas.textFont(font1, nameSize); 
+  canvas.textFont(font3, nameSize); 
   canvas.fill(c1);
   canvas.text(name, namePos.x, namePos.y); 
   namePos.x = gridN1.modules[(int)nameTarget.arrayValue()[0]][(int)nameTarget.arrayValue()[1]].x;
   namePos.y = gridN1.modules[(int)nameTarget.arrayValue()[0]][(int)nameTarget.arrayValue()[1]].y;
-
-  canvas.textFont(font3, taglineSize);
-  canvas.text(tagline, namePos.x, namePos.y+nameSize+taglineSize*2);
+  
+  canvas.fill(c5);
+  canvas.rect(
+  namePos.x-10, 
+  namePos.y+gridN1.modules[0][0].h*8+gridN1Gutter*1.5, 
+  gridN1.modules[0][0].w*6+gridN1Gutter*6, 
+  gridN1.modules[0][0].h*3+gridN1Gutter*2
+    );  
+  canvas.fill(c1);  
+  canvas.textFont(font1, associationSize);
+  canvas.text(association, namePos.x, namePos.y+nameSize+associationSize*2);
 
   canvas.textFont(font1, detailsSize);
   canvas.text(details, detailsPos.x, detailsPos.y);
