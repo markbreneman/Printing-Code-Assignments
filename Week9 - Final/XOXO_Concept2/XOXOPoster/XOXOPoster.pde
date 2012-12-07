@@ -81,50 +81,50 @@ void setup() {
   colors.add(c6);
 
   //SETUP TRIANGLE OBJECTS
-  triSize=30;
+  triSize=100;
   triHeight=sqrt(3)/2*(triSize);
   triangleObjects= new ArrayList();
   color c7 = colors.get(int(random(2, 6)));
-
-  for (int j = 0;j<2; j++) {
-    for (int i = 0; i<4; i++) {  
-      //  for (int j = 0;j<canvas.width; j++) {
-      //    for (int i = 0; i<canvas.height; i++) {
-      PVector startPoint = new PVector(0+j*triHeight, 0+i*triSize);
-      if (i%2!=0 && j%2!=0) {
-        c7 = colors.get(int(random(2, 3)));
+  //RIGHTPOINT TRIANGLES
+//  for (int j = 0;j<canvas.width; j++) {
+//    for (int i = 0; i<canvas.height; i++) {  
+    for (int j = 0;j<4; j++) {
+    for (int i = 0; i<4; i++) {
+      
+      if (j%2==0) {
+        PVector startPoint = new PVector(0+j*triHeight, 0+i*triSize);
+        c7 = colors.get(int(random(2,4)));
+        tmpTri = new Triobject(startPoint, triSize, c7, 0);
+        triangleObjects.add(tmpTri);
       }
-      else if (i%2==0 && j%2==0) {
-        c7 = colors.get(int(random(4, 5)));
+      else if (j%2!=0) {
+        PVector startPoint = new PVector(0+j*triHeight, -triSize/2+i*triSize);
+        c7 = colors.get(int(random(3,5)));
+        tmpTri = new Triobject(startPoint, triSize, c7, 0);
+        triangleObjects.add(tmpTri);
       }
-      else {
-        c7 = colors.get(int(random(2, 5)));
-      }
-
-      tmpTri = new Triobject(startPoint, triSize, c7, 0);
-      triangleObjects.add(tmpTri);
     }
   }
+  //LEFTPOINT TRIANGLES
+//  for (int j = 0;j<canvas.width/30; j++) {
+//    for (int i = 0; i<canvas.height/30; i++) {
+  for (int j = 0;j<4; j++) {
+    for (int i = 0; i<4; i++) {
+      if (j%2==0) {
+        c7 = colors.get(int(random(2,4)));
+        PVector startPoint = new PVector(triHeight+j*triHeight, -triSize/2+i*triSize);
+        tmpTri = new Triobject(startPoint, triSize, c7, 1);
+        triangleObjects.add(tmpTri);
+      }
 
-  //  for (int j = 0;j<canvas.width; j++) {
-  //    for (int i = 0; i<canvas.height; i++) {
-  //  for (int j = 0;j<2; j++) {
-  //    for (int i = 0; i<4; i++) {
-  //      PVector startPoint = new PVector(triHeight+j*triHeight, -triSize/2+i*triSize);
-  //      if (i%2!=0 && j%2!=0) {
-  //        c7 = colors.get(int(random(2, 3)));
-  //      }
-  //      else if (i%2==0 && j%2==0){
-  //        c7 = colors.get(int(random(4, 5)));
-  //      }
-  //      else {
-  //        c7 = colors.get(int(random(2, 5)));
-  //      }
-  //      tmpTri = new Triobject(startPoint, triSize, c7, 1);
-  //      triangleObjects.add(tmpTri);
-  //    }
-  //  }
-
+      else if (j%2!=0) {
+        c7 = colors.get(int(random(3,5)));
+        PVector startPoint = new PVector(triHeight+j*triHeight, 0+i*triSize);
+        tmpTri = new Triobject(startPoint, triSize, c7, 1);
+        triangleObjects.add(tmpTri);
+      }
+    }
+  }
   //SETUP COPY
   //  title = "XOXO";
   //  titlePos=new PVector(random(300, canvas.width-textWidth(title)), random(125, canvas.height));
@@ -217,7 +217,4 @@ void keyPressed()
   if (key==',') controlP5.window("controlP5window").hide();
   if (key=='.') controlP5.window("controlP5window").show();
 }
-
-
-
 
