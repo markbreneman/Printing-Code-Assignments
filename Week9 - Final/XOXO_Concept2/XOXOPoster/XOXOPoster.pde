@@ -3,8 +3,8 @@ PFont font1, font2, font3;
 PShape imgLogo;
 
 //Dimensions of Plotter Paper in Inches
-float paper_width = 4;
-float paper_height = 6;
+float paper_width = 17;
+float paper_height = 25;
 float paper_ratio = paper_height/paper_width;
 
 //Dimensions of an Paper in Pixels at 300dpi
@@ -35,27 +35,21 @@ float triSize, triHeight;
 ArrayList<Triobject> triangleObjects; 
 Triobject tmpTri;
 
-
 /////______COLORS______//////////
 ArrayList<Integer> colors;
 color c1, c2, c3, c4, c5, c6;
 
 /////______COPY______//////////
-//String  title, tagline, details;
-//PVector titlePos, detailsPos;
-//int titleSize, taglineSize, detailsSize;
-//int rectWidth, rectHeight;
+String  title, tagline, details;
+PVector titlePos, detailsPos;
+int titleSize, taglineSize, detailsSize;
+int rectWidth, rectHeight;
 
 void setup() {
   //I like to work with a display that is the same aspect ratio as the paper 
   //I set a width and the height corresponds
-  int width = 800;//Change this number to get a display window with papers aspect ratio
+  int width = 500;//Change this number to get a display window with papers aspect ratio
   int height = int(width*paper_ratio);
-  //FONTS AND ARTWORK
-  //  font1 = loadFont("Tungsten-Medium-48.vlw");
-  //  font2 = loadFont("Atrament-Medium-48.vlw");
-  //  font3 = loadFont("Atrament-MediumItalic-48.vlw");
-
   size(width, height);
   colorMode(HSB, 360, 100, 100, 1);
   background(0, 0, 255, 1);
@@ -66,34 +60,20 @@ void setup() {
   canvas.colorMode(HSB, 360, 100, 100, 1);
   canvas.smooth();
 
-  //SETUP COLORS
-  colors = new ArrayList();
-  c1 = color(346.55, 10.65, 13.75); // Black for print
-  colors.add(c1);
-  c2 = color(0, 0, 100); // White for print
-  colors.add(c2);
-  c3 = color(196, 100, 93); //Deeper Blue
-  colors.add(c3);
-  c4 = color(199, 59, 100); // Blue
-  colors.add(c4); 
-  c5 = color(267.72, 60.66, 59.07);// Purple
-  colors.add(c5);
-  c6 = color(279, 100, 62);//Deeper Purple
-  colors.add(c6);
+  setupParams();//PULL IN FONTS,ARTWORK,COPY & COLORS
 
   //SETUP TRIANGLE OBJECTS
-  triSize=30;
+  triSize=300;
   triHeight=sqrt(3)/2*(triSize);
   triangleObjects= new ArrayList();
   color c7 = colors.get(int(random(2, 6)));
   //Calculate Max Objects per Width/Height  
-  println("w increments" + canvas.width/triSize);
-  println("h increments" + canvas.height/triSize);
+  //  println("w increments" + canvas.width/triSize);
+  //  println("h increments" + canvas.height/triSize);
 
-
-  //RIGHTPOINT TRIANGLES
-  for (int j = 0;j<canvas.width/triSize; j++) {
-    for (int i = 0; i<canvas.height/triSize; i++) {  
+  //RIGHTPOINT TRIANGLES  
+  for (int j = 0;j<grid.modules[0][0].w/triSize+11; j++) {
+    for (int i = 0; i<grid.modules[0][0].h/triSize+11; i++) {  
       PVector startPoint=new PVector(0, 0);//Initialized Locally
 
       //////COLOR SELECTIONS
@@ -115,10 +95,10 @@ void setup() {
       }
       ///////STAGGER COL POSITIONS
       if (j%2==0) {
-        startPoint = new PVector(0+j*triHeight, 0+i*triSize);
+        startPoint = new PVector(grid.modules[0][0].x+j*triHeight, grid.modules[0][0].y+i*triSize);
       }
       else if (j%2!=0) {
-        startPoint = new PVector(0+j*triHeight, -triSize/2+i*triSize);
+        startPoint = new PVector(grid.modules[0][0].x+j*triHeight, grid.modules[0][0].y-triSize/2+i*triSize);
       }
       //CREATE OBJECTS
       tmpTri = new Triobject(startPoint, triSize, c7, 0);
@@ -126,13 +106,13 @@ void setup() {
     }
   }
   //LEFTPOINT TRIANGLES
-  for (int j = 0;j<canvas.width/triSize; j++) {
-    for (int i = 0; i<canvas.height/triSize; i++) { 
+  for (int j = 0;j<grid.modules[0][0].w/triSize+11; j++) {
+    for (int i = 0; i<grid.modules[0][0].h/triSize+11; i++) {
 
       PVector startPoint=new PVector(0, 0);//Initialized Locally
 
       //////COLOR SELECTIONS
-    //EVEN COL AND ROW
+      //EVEN COL AND ROW
       if (j%2==0 && i%2==0) {
         c7 = colors.get(2);
       }
@@ -148,37 +128,27 @@ void setup() {
       else if (j%2!=0 && i%2!=0) {
         c7 = colors.get(5);
       }
-
       ///////STAGGER COL POSITIONS
       if (j%2==0) {
-        startPoint = new PVector(triHeight+j*triHeight, -triSize/2+i*triSize);
+        startPoint = new PVector(grid.modules[0][0].x+triHeight+j*triHeight, grid.modules[0][0].y-triSize/2+i*triSize);
       }
       else if (j%2!=0) {
-        startPoint = new PVector(triHeight+j*triHeight, 0+i*triSize);
+        startPoint = new PVector(grid.modules[0][0].x+triHeight+j*triHeight, grid.modules[0][0].y+i*triSize);
       }
       //CREATE OBJECTS
       tmpTri = new Triobject(startPoint, triSize, c7, 1);
       triangleObjects.add(tmpTri);
     }
   }
-  //SETUP COPY
-  //  title = "XOXO";
-  //  titlePos=new PVector(random(300, canvas.width-textWidth(title)), random(125, canvas.height));
-  //  titleSize=1510;
-  //
-  //  tagline = "An arts and technology festival"+"\n"+"celebrating disruptive creativity.";
-  //  taglineSize=200;
-  //
-  //  details = "YALE UNION CONTEMPORARY | PORTLAND, OR | SEPTEMBER 13-16 2013";
-  //  //  detailsPos=new PVector(gridN1.modules[0][0].x, gridN1.modules[0][gridN1Rows-1].y+gridN1.modules[0][gridN1Rows-1].h*3);
-  //  detailsSize=235;
+
+
 
   //SETUP CONTROL P5 CONTROLS
-  //  controlP5 = new ControlP5(this);
-  //  controlWindow = controlP5.addControlWindow("controlP5window", 500, 225);
-  //  controlWindow.hideCoordinates();
-  //  controlWindow.setTitle("Controls");
-  //  initControls();
+//  controlP5 = new ControlP5(this);
+//  controlWindow = controlP5.addControlWindow("controlP5window", 500, 225);
+//  controlWindow.hideCoordinates();
+//  controlWindow.setTitle("Controls");
+//  initControls();
 }
 
 void draw() {
@@ -190,10 +160,34 @@ void draw() {
 
   //DRAWING THE GEOMETRY
   for (int i = 0; i<triangleObjects.size(); i++) {
+    triangleObjects.get(i).update(triSize);
     triangleObjects.get(i).display();
   }
 
   //DRAWING COPY
+   canvas.noStroke();
+  canvas.fill(c5);
+  //MASKING RECTANGLE: HARDCODED -10 & 1.5 ARE TO ENSURE STROKE COVERAGE
+  canvas.textFont(font1, titleSize); 
+  canvas.fill(c1);
+  canvas.text(title, titlePos.x, titlePos.y); 
+  titlePos.x = random(grid.modules[0][0].x,grid.modules[0][0].x+grid.modules[0][0].w);
+  titlePos.y = random(grid.modules[0][0].y,grid.modules[0][0].h+grid.modules[0][0].h);
+  
+  canvas.textFont(font3, taglineSize);
+  canvas.text(tagline, titlePos.x, titlePos.y+taglineSize);
+
+  canvas.textFont(font1, detailsSize);
+  canvas.text(details, detailsPos.x, detailsPos.y);
+
+
+
+  ///MASKING EXCESS PATTERN
+  canvas.fill(c2);
+  canvas.rect(0, 0, canvas.width, grid.modules[0][0].y);//top
+  canvas.rect(0, 0, grid.modules[0][0].x, canvas.height);//left
+  canvas.rect(canvas.width, 0, -grid.modules[0][0].x, canvas.height);//right
+  canvas.rect(0, grid.modules[0][0].y+grid.modules[0][0].h, canvas.width, 100);//bottom
 
   if (gridShow==true)
   {

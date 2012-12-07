@@ -22,10 +22,10 @@ void initControls() {
   //  controlP5.addSlider("variable to be changed", minValue, maxValue, defaultValue, Xlocation, Ylocation, width, height);
 
   //  ///TITLE SIZE
-  //  S1 = controlP5.addSlider("titleSize", 1300, 1600, 1485, 240, 10, 100, 10);
-  //  S1.setNumberOfTickMarks(300);
-  //  S1.setSliderMode(Slider.FLEXIBLE);
-  //  S1.setWindow(controlWindow);
+  S1 = controlP5.addSlider("triSize", 0, 50, 25, 240, 10, 100, 10);
+  S1.setNumberOfTickMarks(50);
+  S1.setSliderMode(Slider.FLEXIBLE);
+  S1.setWindow(controlWindow);
   //  
   ///TAGLINE SIZE
   //  S2 = controlP5.addSlider("taglineSize", 100, 300, 212, 240, 40, 100, 10);
