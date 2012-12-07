@@ -32,15 +32,14 @@ class Triobject
       x3 = x1 + (cos(atan2(y2-y1, x2-x1)-PI/3) * dist(x1, y1, x2, y2));
       y3 = y1 + (sin(atan2(y2-y1, x2-x1)-PI/3) * dist(x1, y1, x2, y2));
     }
+//    canvas.noStroke();
+//    canvas.fill(tri);
+//    canvas.triangle(x1, y1, x2, y2, x3, y3);
+  }
+  void display() {
     canvas.noStroke();
     canvas.fill(tri);
     canvas.triangle(x1, y1, x2, y2, x3, y3);
-  }
-  void display() {
-//    canvas.strokeWeight(1);
-//    canvas.stroke(tri);
-//    canvas.fill(tri);
-//    canvas.triangle(x1, y1, x2, y2, x3, y3);
   }
 }
 

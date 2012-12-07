@@ -35,6 +35,7 @@ float triSize, triHeight;
 ArrayList<Triobject> triangleObjects; 
 Triobject tmpTri;
 
+
 /////______COLORS______//////////
 ArrayList<Integer> colors;
 color c1, c2, c3, c4, c5, c6;
@@ -71,11 +72,11 @@ void setup() {
   colors.add(c1);
   c2 = color(0, 0, 100); // White for print
   colors.add(c2);
-  c3 = color(267.72, 60.66, 59.07); // Purple
+  c3 = color(196, 100, 93); //Deeper Blue
   colors.add(c3);
   c4 = color(199, 59, 100); // Blue
   colors.add(c4); 
-  c5 = color(196, 100, 93); //Deeper Blue
+  c5 = color(267.72, 60.66, 59.07);// Purple
   colors.add(c5);
   c6 = color(279, 100, 62);//Deeper Purple
   colors.add(c6);
@@ -86,43 +87,69 @@ void setup() {
   triangleObjects= new ArrayList();
   color c7 = colors.get(int(random(2, 6)));
   //RIGHTPOINT TRIANGLES
-//  for (int j = 0;j<canvas.width; j++) {
-//    for (int i = 0; i<canvas.height; i++) {  
-    for (int j = 0;j<4; j++) {
-    for (int i = 0; i<4; i++) {
-      
-      if (j%2==0) {
-        PVector startPoint = new PVector(0+j*triHeight, 0+i*triSize);
-        c7 = colors.get(int(random(2,4)));
-        tmpTri = new Triobject(startPoint, triSize, c7, 0);
-        triangleObjects.add(tmpTri);
+  for (int j = 0;j<canvas.width; j++) {
+    for (int i = 0; i<canvas.height; i++) {  
+//    for (int j = 0;j<5; j++) {
+//    for (int i = 0; i<5; i++) {
+      PVector startPoint=new PVector(0,0);//Initialized Locally
+
+      //////COLOR SELECTIONS
+      //EVEN COL AND ROW
+      if (j%2==0 && i%2==0) {
+        c7 = colors.get(4);
       }
-      else if (j%2!=0) {
-        PVector startPoint = new PVector(0+j*triHeight, -triSize/2+i*triSize);
-        c7 = colors.get(int(random(3,5)));
-        tmpTri = new Triobject(startPoint, triSize, c7, 0);
-        triangleObjects.add(tmpTri);
+      //EVEN COL AND ODD ROW
+      else if (j%2==0 && i%2!=0) {
+        c7 = colors.get(2);
       }
+      //ODD COL AND EVEN ROW
+      else if (j%2!=0 && i%2==0) {
+        c7 = colors.get(4);
+      }
+      //ODD COL AND ROW
+      else if (j%2!=0 && i%2!=0) {
+        c7 = colors.get(3);
+      }
+      ///////STAGGER COL POSITIONS
+      if(j%2==0){startPoint = new PVector(0+j*triHeight,0+i*triSize);}
+      else if(j%2!=0){startPoint = new PVector(0+j*triHeight, -triSize/2+i*triSize);}
+      //CREATE OBJECTS
+      tmpTri = new Triobject(startPoint, triSize, c7, 0);
+      triangleObjects.add(tmpTri);
     }
   }
   //LEFTPOINT TRIANGLES
-//  for (int j = 0;j<canvas.width/30; j++) {
-//    for (int i = 0; i<canvas.height/30; i++) {
-  for (int j = 0;j<4; j++) {
-    for (int i = 0; i<4; i++) {
-      if (j%2==0) {
-        c7 = colors.get(int(random(2,4)));
-        PVector startPoint = new PVector(triHeight+j*triHeight, -triSize/2+i*triSize);
-        tmpTri = new Triobject(startPoint, triSize, c7, 1);
-        triangleObjects.add(tmpTri);
+  for (int j = 0;j<canvas.width; j++) {
+    for (int i = 0; i<canvas.height; i++) {
+//  for (int j = 0;j<3; j++) {
+//    for (int i = 0; i<6; i++) {
+      
+      PVector startPoint=new PVector(0,0);//Initialized Locally
+      
+      //////COLOR SELECTIONS
+      //EVEN COL & ROW
+      if (j%2==0 && i%2==0) {
+        c7 = colors.get(4);
+      }
+      //EVEN COL & ODD ROW
+      else if (j%2==0 && i%2!=0) {
+        c7 = colors.get(5);
+      }
+      //ODD COL & EVEN ROW
+      else if (j%2!=0 && i%2==0) {
+        c7 = colors.get(2);
+      }
+      //ODD COL & ROW
+      else if (j%2!=0 && i%2!=0) {
+        c7 = colors.get(3);
       }
 
-      else if (j%2!=0) {
-        c7 = colors.get(int(random(3,5)));
-        PVector startPoint = new PVector(triHeight+j*triHeight, 0+i*triSize);
-        tmpTri = new Triobject(startPoint, triSize, c7, 1);
-        triangleObjects.add(tmpTri);
-      }
+      ///////STAGGER COL POSITIONS
+      if(j%2==0){startPoint = new PVector(triHeight+j*triHeight,-triSize/2+i*triSize);}
+      else if(j%2!=0){startPoint = new PVector(triHeight+j*triHeight, 0+i*triSize);}
+      //CREATE OBJECTS
+      tmpTri = new Triobject(startPoint, triSize, c7, 1);
+      triangleObjects.add(tmpTri);
     }
   }
   //SETUP COPY
@@ -153,9 +180,9 @@ void draw() {
   canvas.noFill();
 
   //DRAWING THE GEOMETRY
-  //  for (int i = 0; i<triangleObjects.size(); i++) {
-  //    triangleObjects.get(i).display();
-  //  }
+  for (int i = 0; i<triangleObjects.size(); i++) {
+    triangleObjects.get(i).display();
+  }
 
   //DRAWING COPY
 
