@@ -141,8 +141,6 @@ void setup() {
     }
   }
 
-
-
   //SETUP CONTROL P5 CONTROLS
 //  controlP5 = new ControlP5(this);
 //  controlWindow = controlP5.addControlWindow("controlP5window", 500, 225);
@@ -160,7 +158,7 @@ void draw() {
 
   //DRAWING THE GEOMETRY
   for (int i = 0; i<triangleObjects.size(); i++) {
-    triangleObjects.get(i).update(triSize);
+//    triangleObjects.get(i).update(triSize);
     triangleObjects.get(i).display();
   }
 
@@ -179,8 +177,6 @@ void draw() {
 
   canvas.textFont(font1, detailsSize);
   canvas.text(details, detailsPos.x, detailsPos.y);
-
-
 
   ///MASKING EXCESS PATTERN
   canvas.fill(c2);
