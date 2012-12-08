@@ -39,6 +39,7 @@ Triobject tmpTri;
 ArrayList<Integer> colors;
 color c1, c2, c3, c4, c5, c6;
 
+
 /////______COPY______//////////
 String  title, tagline, details;
 PVector titlePos, detailsPos;
@@ -158,7 +159,6 @@ void draw() {
 
   //DRAWING THE GEOMETRY
   for (int i = 0; i<triangleObjects.size(); i++) {
-//    triangleObjects.get(i).update(triSize);
     triangleObjects.get(i).display();
   }
 
@@ -170,7 +170,7 @@ void draw() {
   canvas.fill(c1);
   canvas.text(title, titlePos.x, titlePos.y); 
   titlePos.x = random(grid.modules[0][0].x,grid.modules[0][0].x+grid.modules[0][0].w);
-  titlePos.y = random(grid.modules[0][0].y,grid.modules[0][0].h+grid.modules[0][0].h);
+  titlePos.y = random(grid.modules[0][0].y,grid.modules[0][0].y+grid.modules[0][0].h);
   
   canvas.textFont(font3, taglineSize);
   canvas.text(tagline, titlePos.x, titlePos.y+taglineSize);
@@ -184,7 +184,7 @@ void draw() {
   canvas.rect(0, 0, grid.modules[0][0].x, canvas.height);//left
   canvas.rect(canvas.width, 0, -grid.modules[0][0].x, canvas.height);//right
   canvas.rect(0, grid.modules[0][0].y+grid.modules[0][0].h, canvas.width, 100);//bottom
-
+  
   if (gridShow==true)
   {
     canvas.strokeWeight(10);
@@ -244,3 +244,13 @@ void keyPressed()
   if (key=='.') controlP5.window("controlP5window").show();
 }
 
+void mousePressed() {
+  float mappedMX = map(mouseX,0,width,0,canvas.width);
+  float mappedMY = map(mouseY,0,height,0,canvas.height);
+  
+  // When the mouse is pressed, we must check every single button
+  for (int i = 0; i < triangleObjects.size(); i++) {
+    
+    triangleObjects.get(i).click(mappedMX,mappedMY); 
+  }
+}

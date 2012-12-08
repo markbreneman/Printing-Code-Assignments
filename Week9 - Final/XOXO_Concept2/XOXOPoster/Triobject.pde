@@ -1,9 +1,9 @@
 class Triobject
 {
-  PVector Point1, Point2, Point3, CenterPoint, OuterPoint, crossProduct1,crossProduct2;
+  PVector Point1, Point2, Point3, centerPoint, OuterPoint, crossProduct1, crossProduct2;
   color tri;
-  float dir; 
-  float triangleSize; 
+  float triangleSize, triRadius, dir; 
+  int colorCount;
 
   Triobject(PVector _start, float _size, color _c, float _dir) 
   {
@@ -11,7 +11,7 @@ class Triobject
     dir = _dir;
     triangleSize=_size;
     Point1=_start;
-    OuterPoint = new PVector(0,0);
+    //    OuterPoint = new PVector(0,0);
 
     //Zero indicates triangles pointing right
     if (dir==0) {
@@ -20,7 +20,8 @@ class Triobject
       Point1.x + (cos(atan2(Point2.y-Point1.y, Point2.x-Point1.x)-PI/3) * dist(Point1.x, Point1.y, Point2.x, Point2.y)), 
       Point1.y + (sin(atan2(Point2.y-Point1.y, Point2.x-Point1.x)-PI/3) * dist(Point1.x, Point1.y, Point2.x, Point2.y))
         );
-      CenterPoint = new PVector(Point1.x+triHeight/2, Point1.y-triSize/2);
+      //      centerPoint = new PVector(0,0);
+      centerPoint = new PVector(Point1.x+triHeight*1/3, Point1.y-triSize/2);
     }
 
     //Zero indicates triangles pointing left
@@ -30,54 +31,55 @@ class Triobject
       Point1.x + (cos(atan2(Point2.y-Point1.y, Point2.x-Point1.x)-PI/3) * dist(Point1.x, Point1.y, Point2.x, Point2.y)), 
       Point1.y + (sin(atan2(Point2.y-Point1.y, Point2.x-Point1.x)-PI/3) * dist(Point1.x, Point1.y, Point2.x, Point2.y))
         );
-      CenterPoint = new PVector(Point1.x-triHeight/2, Point1.y+triSize/2);
+      //     centerPoint = new PVector(0,0); 
+      centerPoint = new PVector(Point1.x-triHeight*1/3, Point1.y-triSize/2);
     }
-
     canvas.noStroke();
     canvas.fill(tri);
     canvas.triangle(Point1.x, Point1.y, Point2.x, Point2.y, Point3.x, Point3.y);
   }
   void display() {
     canvas.noStroke();
-    canvas.fill(tri);
-    canvas.triangle(Point1.x, Point1.y, Point2.x, Point2.y, Point3.x, Point3.y);
-    PVector currentMouse = new PVector(mouseX,mouseY);
-    PointInTriangle(currentMouse, Point1, Point2, Point3);
-//    SameSide(CenterPoint,OuterPoint, Point1, Point2);
+
+    // The color changes based on the state of the click
+    if (colorCount==1) {
+      canvas.fill(c1);
+    } 
+    else if (colorCount==2) {
+      canvas.fill(c2);
+    }
+    else if (colorCount==3) {
+      canvas.fill(c3);
+    }
+    else if (colorCount==4) {
+      canvas.fill(c4);
+    }
+    else if (colorCount==5) {
+      canvas.fill(c5);
+    }
+    else {
+      canvas.fill(tri);
+    }
     
+    canvas.triangle(Point1.x, Point1.y, Point2.x, Point2.y, Point3.x, Point3.y);
+    canvas.stroke(0);
+    triRadius = sqrt(3)/6*triSize;
+
+    ///DEBUG MOUSE AREAS
+    //    canvas.fill(0,87,96);
+    //    canvas.ellipse(centerPoint.x, centerPoint.y, triRadius*2, triRadius*2);
   }
 
-  boolean SameSide(PVector p1, PVector p2, PVector a, PVector b) {
-    b = PVector.sub(b, a);
-    p1 = PVector.sub(p1, a);
-    p2 = PVector.sub(p2, a);
+  void click(float mx, float my) {
+    float distance = dist(mx, my, centerPoint.x, centerPoint.y);
 
-    crossProduct1 = b.cross(p1);
-    crossProduct2 = b.cross(p2);
-
-    if ((crossProduct1.dot(crossProduct2)) >= 0) {
-      return true;
+    // Check to see if a point is inside the rectangle
+    if (distance < triRadius) {
+      colorCount+=1;
+      if (colorCount==5) {
+        colorCount=0;
+      }
     }
-    else
-      return false;
-  }
-
-  boolean PointInTriangle(PVector p, PVector a, PVector b, PVector c) {
-    if (SameSide(p, a, b, c) && SameSide(p, b, a, c) && SameSide(p, c, a, b)) {
-      canvas.fill(255, 0, 0);
-      println("firing!");
-      return true;
-    }
-    else
-      canvas.fill(255, 255, 255);
-    return false;
-  }
-
-
-
-  void update(float _size) {
-    triangleSize=_size;
   }
 }
-
 
