@@ -45,6 +45,7 @@ String  title, tagline, details;
 PVector titlePos, detailsPos;
 int titleSize, taglineSize, detailsSize;
 int rectWidth, rectHeight;
+boolean placementMode=false;
 
 void setup() {
   //I like to work with a display that is the same aspect ratio as the paper 
@@ -62,95 +63,25 @@ void setup() {
   canvas.smooth();
 
   setupParams();//PULL IN FONTS,ARTWORK,COPY & COLORS
-
-  //SETUP TRIANGLE OBJECTS
-  triSize=300;
-  triHeight=sqrt(3)/2*(triSize);
   triangleObjects= new ArrayList();
-  color c7 = colors.get(int(random(2, 6)));
-  //Calculate Max Objects per Width/Height  
-  //  println("w increments" + canvas.width/triSize);
-  //  println("h increments" + canvas.height/triSize);
+//  createTriObjs();//CREATE ALL THE TRIANGLE OBJECTS AND PUT THEM IN THE ARRAY
 
-  //RIGHTPOINT TRIANGLES  
-  for (int j = 0;j<grid.modules[0][0].w/triSize+11; j++) {
-    for (int i = 0; i<grid.modules[0][0].h/triSize+11; i++) {  
-      PVector startPoint=new PVector(0, 0);//Initialized Locally
-
-      //////COLOR SELECTIONS
-      //EVEN COL AND ROW
-      if (j%2==0 && i%2==0) {
-        c7 = colors.get(3);
-      }
-      //EVEN COL AND ODD ROW
-      else if (j%2==0 && i%2!=0) {
-        c7 = colors.get(4);
-      }
-      //ODD COL AND EVEN ROW
-      else if (j%2!=0 && i%2==0) {
-        c7 = colors.get(4);
-      }
-      //ODD COL AND ROW
-      else if (j%2!=0 && i%2!=0) {
-        c7 = colors.get(4);
-      }
-      ///////STAGGER COL POSITIONS
-      if (j%2==0) {
-        startPoint = new PVector(grid.modules[0][0].x+j*triHeight, grid.modules[0][0].y+i*triSize);
-      }
-      else if (j%2!=0) {
-        startPoint = new PVector(grid.modules[0][0].x+j*triHeight, grid.modules[0][0].y-triSize/2+i*triSize);
-      }
-      //CREATE OBJECTS
-      tmpTri = new Triobject(startPoint, triSize, c7, 0);
-      triangleObjects.add(tmpTri);
-    }
-  }
-  //LEFTPOINT TRIANGLES
-  for (int j = 0;j<grid.modules[0][0].w/triSize+11; j++) {
-    for (int i = 0; i<grid.modules[0][0].h/triSize+11; i++) {
-
-      PVector startPoint=new PVector(0, 0);//Initialized Locally
-
-      //////COLOR SELECTIONS
-      //EVEN COL AND ROW
-      if (j%2==0 && i%2==0) {
-        c7 = colors.get(2);
-      }
-      //EVEN COL AND ODD ROW
-      else if (j%2==0 && i%2!=0) {
-        c7 = colors.get(5);
-      }
-      //ODD COL AND EVEN ROW
-      else if (j%2!=0 && i%2==0) {
-        c7 = colors.get(3);
-      }
-      //ODD COL AND ROW
-      else if (j%2!=0 && i%2!=0) {
-        c7 = colors.get(5);
-      }
-      ///////STAGGER COL POSITIONS
-      if (j%2==0) {
-        startPoint = new PVector(grid.modules[0][0].x+triHeight+j*triHeight, grid.modules[0][0].y-triSize/2+i*triSize);
-      }
-      else if (j%2!=0) {
-        startPoint = new PVector(grid.modules[0][0].x+triHeight+j*triHeight, grid.modules[0][0].y+i*triSize);
-      }
-      //CREATE OBJECTS
-      tmpTri = new Triobject(startPoint, triSize, c7, 1);
-      triangleObjects.add(tmpTri);
-    }
-  }
-
+  titlePos.x = random(grid.modules[0][0].x,grid.modules[0][0].x+grid.modules[0][0].w-textWidth(title));
+  titlePos.y = random(grid.modules[0][0].y-titleSize,grid.modules[0][0].y+grid.modules[0][0].h);
+  
+  
   //SETUP CONTROL P5 CONTROLS
 //  controlP5 = new ControlP5(this);
 //  controlWindow = controlP5.addControlWindow("controlP5window", 500, 225);
 //  controlWindow.hideCoordinates();
 //  controlWindow.setTitle("Controls");
 //  initControls();
+//  println(width);
+//  println(height);
 }
 
 void draw() {
+  
   //  canvas.background(0, 0, 100);
   canvas.noStroke();
 
@@ -158,25 +89,27 @@ void draw() {
   canvas.noFill();
 
   //DRAWING THE GEOMETRY
+  if(triangleObjects.size()>0){
   for (int i = 0; i<triangleObjects.size(); i++) {
     triangleObjects.get(i).display();
   }
+  }
 
   //DRAWING COPY
-   canvas.noStroke();
+  canvas.noStroke();
   canvas.fill(c5);
   //MASKING RECTANGLE: HARDCODED -10 & 1.5 ARE TO ENSURE STROKE COVERAGE
   canvas.textFont(font1, titleSize); 
   canvas.fill(c1);
   canvas.text(title, titlePos.x, titlePos.y); 
-  titlePos.x = random(grid.modules[0][0].x,grid.modules[0][0].x+grid.modules[0][0].w);
-  titlePos.y = random(grid.modules[0][0].y,grid.modules[0][0].y+grid.modules[0][0].h);
   
   canvas.textFont(font3, taglineSize);
   canvas.text(tagline, titlePos.x, titlePos.y+taglineSize);
 
   canvas.textFont(font1, detailsSize);
   canvas.text(details, detailsPos.x, detailsPos.y);
+  canvas.fill(c1);
+  canvas.ellipse(titlePos.x,titlePos.y,100,100);
 
   ///MASKING EXCESS PATTERN
   canvas.fill(c2);
@@ -184,6 +117,11 @@ void draw() {
   canvas.rect(0, 0, grid.modules[0][0].x, canvas.height);//left
   canvas.rect(canvas.width, 0, -grid.modules[0][0].x, canvas.height);//right
   canvas.rect(0, grid.modules[0][0].y+grid.modules[0][0].h, canvas.width, 100);//bottom
+  
+  if(placementMode){
+  titlePos.x = titleTarget.arrayValue()[0];
+  titlePos.y = titleTarget.arrayValue()[1];
+  }
   
   if (gridShow==true)
   {
@@ -238,6 +176,10 @@ void keyPressed()
       println(showing);
     }
   }
+  
+  if (key == 'p'){
+  placementMode=!placementMode;
+  }
 
   //CONTROL P5 HIDE-SHOW 
   if (key==',') controlP5.window("controlP5window").hide();
@@ -250,7 +192,6 @@ void mousePressed() {
   
   // When the mouse is pressed, we must check every single button
   for (int i = 0; i < triangleObjects.size(); i++) {
-    
     triangleObjects.get(i).click(mappedMX,mappedMY); 
   }
 }

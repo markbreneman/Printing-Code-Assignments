@@ -43,19 +43,19 @@ class Triobject
 
     // The color changes based on the state of the click
     if (colorCount==1) {
-      canvas.fill(c1);
+      canvas.fill(c2);
     } 
     else if (colorCount==2) {
       canvas.fill(c2);
     }
     else if (colorCount==3) {
-      canvas.fill(c3);
+      canvas.fill(c2);
     }
     else if (colorCount==4) {
-      canvas.fill(c4);
+      canvas.fill(c2);
     }
     else if (colorCount==5) {
-      canvas.fill(c5);
+      canvas.fill(c2);
     }
     else {
       canvas.fill(tri);

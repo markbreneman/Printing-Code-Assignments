@@ -1,12 +1,12 @@
 void initControls() {
 
   // 2D SLIDER for TITLE AND TAG  
-  //  titleTarget = controlP5.addSlider2D("TitlePlacement", 0, gridN1Cols-1, 0, gridN1Rows-1, gridN1Cols/2, gridN1Rows/2, 120, 10, 100, 100);
-  //  titleTarget.setArrayValue(new float[] {
-  //    (gridN1Cols-1)/2, (gridN1Rows-1)/2
-  //  }
-  //  );  
-  //  titleTarget.setWindow(controlWindow);
+  titleTarget = controlP5.addSlider2D("TitlePlacement", 0, canvas.width, 0, canvas.height, canvas.width/2, canvas.height/2, 120, 10, 100, 100);
+  titleTarget.setArrayValue(new float[] {
+    canvas.width/2, canvas.height/2
+  }
+  );  
+  titleTarget.setWindow(controlWindow);
 
   // INDIVIDUAL SLIDERS FOR COPY SIZE
   //  controlP5.addSlider("variable to be changed", minValue, maxValue, defaultValue, Xlocation, Ylocation, width, height);
