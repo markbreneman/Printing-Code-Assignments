@@ -63,7 +63,7 @@ class Triobject
     
     canvas.triangle(Point1.x, Point1.y, Point2.x, Point2.y, Point3.x, Point3.y);
     canvas.stroke(0);
-    triRadius = sqrt(3)/6*triSize;
+    triRadius = sqrt(3)/6*triSize*3;//Should be just triSize not triSize*3 but this will make changing easier
 
     ///DEBUG MOUSE AREAS
     //    canvas.fill(0,87,96);

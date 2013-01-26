@@ -34,10 +34,10 @@ void initControls() {
   S2.setWindow(controlWindow);
   
   ///DETAILS SIZE
-//  S3 = controlP5.addSlider("detailsSize", 200, 250, 236, 240, 80, 100, 10);
-//  S3.setNumberOfTickMarks(50);
-//  S3.setSliderMode(Slider.FLEXIBLE);
-//  S3.setWindow(controlWindow);
+  S3 = controlP5.addSlider("detailsSize", 200, 250, 236, 240, 80, 100, 10);
+  S3.setNumberOfTickMarks(50);
+  S3.setSliderMode(Slider.FLEXIBLE);
+  S3.setWindow(controlWindow);
 
   //Masking Rect Properties
   S4 = controlP5.addSlider("rectWidth", 2121, 2170, 2121, 240, 120, 100, 10);

@@ -42,7 +42,7 @@ color c1, c2, c3, c4, c5, c6;
 
 /////______COPY______//////////
 String  title, tagline, details;
-PVector titlePos, detailsPos;
+PVector titlePos, detailsPos,taglinePos;
 int titleSize, taglineSize, detailsSize;
 int rectWidth, rectHeight;
 boolean placementMode=false;
@@ -64,20 +64,20 @@ void setup() {
 
   setupParams();//PULL IN FONTS,ARTWORK,COPY & COLORS
   triangleObjects= new ArrayList();
-//  createTriObjs();//CREATE ALL THE TRIANGLE OBJECTS AND PUT THEM IN THE ARRAY
+  createTriObjs();//CREATE ALL THE TRIANGLE OBJECTS AND PUT THEM IN THE ARRAY
 
   titlePos.x = random(grid.modules[0][0].x,grid.modules[0][0].x+grid.modules[0][0].w-textWidth(title));
   titlePos.y = random(grid.modules[0][0].y-titleSize,grid.modules[0][0].y+grid.modules[0][0].h);
   
   
   //SETUP CONTROL P5 CONTROLS
-//  controlP5 = new ControlP5(this);
-//  controlWindow = controlP5.addControlWindow("controlP5window", 500, 225);
-//  controlWindow.hideCoordinates();
-//  controlWindow.setTitle("Controls");
-//  initControls();
-//  println(width);
-//  println(height);
+  controlP5 = new ControlP5(this);
+  controlWindow = controlP5.addControlWindow("controlP5window", 500, 225);
+  controlWindow.hideCoordinates();
+  controlWindow.setTitle("Controls");
+  initControls();
+  println(width);
+  println(height);
 }
 
 void draw() {
@@ -104,12 +104,12 @@ void draw() {
   canvas.text(title, titlePos.x, titlePos.y); 
   
   canvas.textFont(font3, taglineSize);
-  canvas.text(tagline, titlePos.x, titlePos.y+taglineSize);
+  canvas.text(tagline, taglinePos.x, taglinePos.y);
 
   canvas.textFont(font1, detailsSize);
   canvas.text(details, detailsPos.x, detailsPos.y);
   canvas.fill(c1);
-  canvas.ellipse(titlePos.x,titlePos.y,100,100);
+//  canvas.ellipse(titlePos.x,titlePos.y,100,100);
 
   ///MASKING EXCESS PATTERN
   canvas.fill(c2);
@@ -178,7 +178,7 @@ void keyPressed()
   }
   
   if (key == 'p'){
-  placementMode=!placementMode;
+//  placementMode=!placementMode;
   }
 
   //CONTROL P5 HIDE-SHOW 

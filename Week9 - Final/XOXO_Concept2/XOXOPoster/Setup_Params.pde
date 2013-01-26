@@ -36,9 +36,10 @@ void setupParams() {
   titleSize=1510;
 
   tagline = "An arts and technology festival"+"\n"+"celebrating disruptive creativity.";
+  taglinePos=new PVector(random(300, canvas.width-textWidth(title)), random(125, canvas.height));
   taglineSize=200;
 
-  details = "YALE UNION CONTEMPORARY | PORTLAND, OR | SEPTEMBER 13-16 2013";
+  details = "YALE UNION CONTEMPORARY"+"\n"+"PORTLAND, OR" +"\n" + "SEPTEMBER 13-16 2013";
   detailsPos=new PVector(random(grid.modules[0][0].x, grid.modules[0][0].x+grid.modules[0][0].w), random(grid.modules[0][0].x, grid.modules[0][0].y+grid.modules[0][0].h));
   detailsSize=235;
 }
